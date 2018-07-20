@@ -25,7 +25,7 @@ SRC_NAME =	main.c tools.c		insert_instructions.c \
 			or.c				st.c \
 			sti.c				sub.c \
 			xor.c				zjmp.c \
-			ocp.c \
+			ocp.c 				set_ramvalue.c \
 			get_dir.c \
 			get_indir.c \
 			get_reg.c \

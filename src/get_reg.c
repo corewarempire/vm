@@ -1,8 +1,8 @@
 #include "corewar.h"
 
-unsigned char	get_reg(t_process *proc, unsigned int index)
+int		get_reg(t_process *proc, unsigned int index)
 {
-	unsigned char ret;
+	int ret;
 
 	ret = proc->r[index - 1];
 	return (ret);

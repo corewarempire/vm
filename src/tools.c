@@ -29,12 +29,15 @@ void    print_memory(t_board *bd)
     i = 0;
     while (i != MEM_SIZE)
     {
-        j = (bd->ram[i] / 16) + 48;
+        j = (bd->ram[i] / 16) + 48;        
+j > '0' ? ft_putstr("\033[0;31m") : 0;
         j > '9' ? ft_putchar(j + 39) : ft_putchar(j);
         j = (bd->ram[i] % 16) + 48;
+j > '0' ? ft_putstr("\033[0;31m") : 0;
         j > '9' ? ft_putchar(j + 39) : ft_putchar(j);
         ft_putchar(' ');
         i++;
+ft_putstr("\033[0m");
     }
 }
 

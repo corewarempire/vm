@@ -76,9 +76,9 @@ typedef struct		s_op
 /*
 ** process
 */
-
+void			set_ramvalue(t_board *bd, unsigned int pc, unsigned int value);
 t_lst_process	*init_list_process(void);
-t_process		*add_process(t_lst_process *lst, unsigned int r1, unsigned int pc);
+t_process		*add_process(t_lst_process *lst, int r1, unsigned int pc);
 int				init_process(t_board *board);
 void			loop_process(t_board *board);
 int				check_instruction(t_board *bd, t_process *proc);
@@ -114,7 +114,7 @@ unsigned int	ocp_third(unsigned char c);
 int				get_dir4(t_board *bd, unsigned int pos);
 short			get_dir2(t_board *bd, unsigned int pos);
 int				get_indir(t_board *bd, unsigned int pos);
-unsigned char	get_reg(t_process *proc, unsigned int index);
+int 			get_reg(t_process *proc, unsigned int index);
 
 
 t_board 		*init_board_data(t_board *bd, char **argv);

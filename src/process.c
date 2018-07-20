@@ -24,7 +24,7 @@ t_process		*new_process(unsigned int r1, unsigned int pc)
 	return (new);
 }
 
-t_process		*add_process(t_lst_process *lst, unsigned int r1, unsigned int pc)
+t_process		*add_process(t_lst_process *lst, int r1, unsigned int pc)
 {
 	t_process	*process;
 
