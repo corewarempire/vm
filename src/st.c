@@ -12,8 +12,7 @@ void	st(t_board *bd, t_process *proc)
 	proc->carry = (!first_reg) ? 1 : 0;
 	if (octal & T_REG)
 		proc->r[value - 1] = first_reg;
-	else
-	{
-		
-	}
+	else if (octal & T_IND)
+		set_ramvalue(bd, proc->pc + (value % IDX_MOD), first_reg);
+	// avancer de une case pc ou de la totalite de l'info?
 }
