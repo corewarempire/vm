@@ -1,32 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adhondt <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/20 01:48:35 by adhondt          ###   ########.fr       */
+/*   Updated: 2018/07/20 10:35:03 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
+
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include "op.h"
-# define BUFF_SIZE 4
 
-typedef struct		s_proc
+# define BUFF_SIZE 4
+# define MEM_MOD(x) (x % MEM_SIZE)
+
+typedef struct	s_process
 {
-	int				pos;
-	int				carry;
-	int				*reg[REG_NUMBER];
-	struct s_proc	*next;
-}					t_process;
+	struct s_process	*next;						//Prochain processus..
+	int					r[REG_NUMBER];				//registre
+	int					id;							//Correspond au registre r1
+	int					id_player;					//Joueur possedant le processus
+	int					carry;						//carry du processus
+	int					exec_cycle;					//cycle a effectue avant une operation
+	int					op_code;					//Operation courante
+	unsigned int		pc;							//index dans la ram
+}				t_process;
+
+typedef struct	s_lst_process
+{
+	t_process	*process;							//Liste des processus
+	int				len;							//Nombre de processus instancier
+}				t_lst_process;
 
 typedef struct		s_champ
 {
@@ -43,8 +56,65 @@ typedef struct		s_board
 	char			*opt_list;						// -dump etc
 	t_champ			*first_champ;					//list chainee
 	int				player_id;						//ids par defaut < 0 (vm zaz)
-	int				champions_count;
+	unsigned int	champions_count;
+	t_lst_process	*lst_process;
+	unsigned int	cycle_to_die;
 }					t_board;
+
+typedef struct		s_op
+{
+	char			*name;							//Name
+	int				argc;							//Nombre d'argument
+	int				argv[3];						//Decomposition des arguments
+	int				op_code;							//Valeur de l'opcode
+	int				cycles;							//duree d'execution
+	char			*lname;							//Long name?
+	int				octal;							//format
+	int				carry;							//modifie le carry
+}					t_op;
+
+/*
+** process
+*/
+
+t_lst_process	*init_list_process(void);
+t_process		*add_process(t_lst_process *lst, unsigned int r1, unsigned int pc);
+int				init_process(t_board *board);
+void			loop_process(t_board *board);
+int				check_instruction(t_board *bd, t_process *proc);
+
+/*
+** Game
+*/
+void			play(t_board *board);
+void			add(t_board *board, t_process *process);
+void			aff(t_board *board, t_process *process);
+void			and(t_board *board, t_process *process);
+void			frk(t_board *board, t_process *process);
+void			ld(t_board *board, t_process *process);
+void			ldi(t_board *board, t_process *process);
+void			lfork(t_board *board, t_process *process);
+void			live(t_board *board, t_process *process);
+void			lld(t_board *board, t_process *process);
+void			lldi(t_board *board, t_process *process);
+void			or(t_board *board, t_process *process);
+void			st(t_board *board, t_process *process);
+void			sti(t_board *board, t_process *process);
+void			sub(t_board *board, t_process *process);
+void			xor(t_board *board, t_process *process);
+void			zjmp(t_board *board, t_process *process);
+
+/*
+** util
+*/
+
+unsigned int	ocp_first(unsigned char c);
+unsigned int	ocp_scd(unsigned char c);
+unsigned int	ocp_third(unsigned char c);
+int				get_dir4(t_board *bd, unsigned int pos);
+short			get_dir2(t_board *bd, unsigned int pos);
+int				get_indir(t_board *bd, unsigned int pos);
+unsigned char	get_reg(t_process *proc, unsigned int index);
 
 
 t_board 		*init_board_data(t_board *bd, char **argv);

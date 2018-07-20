@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   insert_instructions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adhondt <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:06:53 by adhondt           #+#    #+#             */
-/*   Updated: 2018/06/14 13:26:26 by adhondt          ###   ########.fr       */
+/*   Updated: 2018/07/20 08:15:48 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ void    insert_instructions(t_board *bd)
     int i;
     int j;
 
-    j = MEM_SIZE / bd->champions_count;
     i = 0;
-    while (bd->champions_count--)
+    j = 0;
+    while (i < bd->champions_count)
+    {
         insert_code(bd, (j * i++));
+        j = MEM_SIZE / bd->champions_count;
+    }
 }
