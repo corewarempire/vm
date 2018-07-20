@@ -26,8 +26,22 @@ INC_PATH = ./inc
 OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
-SRC_NAME =	main.c data_initialization.c tools.c insert_instructions.c \
-			collect_inputs.c \
+SRC_NAME =	main.c tools.c		insert_instructions.c \
+			collect_inputs.c	play.c \
+			init_process.c		check_instruction.c \
+			add.c				aff.c \
+			and.c				fork.c \
+			ld.c				ldi.c \
+			lfork.c				live.c \
+			lld.c				lldi.c \
+			or.c				st.c \
+			sti.c				sub.c \
+			xor.c				zjmp.c \
+			ocp.c \
+			get_dir.c \
+			get_indir.c \
+			get_reg.c \
+			process.c
 
 LIB_NAME = 	ft_putchar.c ft_putstr.c ft_chardup.c ft_strdup.c \
 			ft_itoa.c ft_atoi.c ft_itoa_base.c ft_memalloc.c ft_memalloc_c.c \
@@ -57,7 +71,7 @@ $(NAME): $(OBJ) $(OBJLIB)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(FLAGS) -I./inc -o $@ -c $<
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
