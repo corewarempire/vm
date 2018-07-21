@@ -20,7 +20,7 @@ t_process		*new_process(unsigned int r1, unsigned int pc)
 		return (0);
 	i = 0;
 	while (i < REG_NUMBER)
-		new[i++] = 0;
+		new->r[i++] = 0;
 	new->pc = pc;
 	new->r[0] = r1;
 	new->id_player = r1;

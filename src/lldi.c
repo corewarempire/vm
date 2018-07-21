@@ -7,8 +7,8 @@ void	lldi(t_board *bd, t_process *proc)
 	int				val2;
 
 	proc->pc++;
-	ocp = ocp_first(bd->ram[MEN_NOD(proc->pc++)]);
-	if (!(val1 = get_params(bd, proc, &proc->pc, {ocp, 1})))
+	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc++)]);
+	if (!(val1 = get_params(bd, proc, &proc->pc, (int[2]){ocp, 1})))
 		proc->carry = 1;
 	else
 		proc->carry = 0;

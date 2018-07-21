@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-int			get_params(t_board *bd, t_process *proc, int *pc, int data[2])
+int			get_params(t_board *bd, t_process *proc, unsigned int *pc, int data[2])
 {
 	int res;
 
@@ -12,12 +12,12 @@ int			get_params(t_board *bd, t_process *proc, int *pc, int data[2])
 	}
 	else if (data[0] == T_IND)
 	{
-		res = get_indir(bd, pc);
+		res = get_indir(bd, *pc);
 		(*pc) += 2;
 	}
 	else
 	{
-		res = (!data[2]) ? get_dir4(bd, pc) : get_dir2(bd, pc);
+		res = (!data[2]) ? get_dir4(bd, *pc) : get_dir2(bd, *pc);
 		(*pc) += (!data[2]) ? 4 : 2;
 	}
 	return (res);

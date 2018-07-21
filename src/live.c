@@ -6,7 +6,7 @@ void	live(t_board *bd, t_process *proc)
 	int				val;
 
 	proc->pc++;
-	val = get_params(bd, proc, &proc->pc, {T_DIR, 0});
+	val = get_params(bd, proc, &proc->pc, (int[2]){T_DIR, 0});
 	proc->last_live = bd->cycle;
 	proc->pc++;
 	printf("Joueur en vie %d\n", val);

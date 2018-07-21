@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/21 09:25:13 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/21 11:42:10 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_process
 	int					carry;						//carry du processus
 	int					exec_cycle;					//cycle a effectue avant une operation
 	int					op_code;					//Operation courante
+	int					last_live;					//Dernier cycle live
 	unsigned int		pc;							//index dans la ram
 }				t_process;
 
@@ -58,7 +59,8 @@ typedef struct		s_board
 	int				player_id;						//ids par defaut < 0 (vm zaz)
 	unsigned int	champions_count;
 	t_lst_process	*lst_process;
-	unsigned int	cycle_to_die;
+	unsigned int	cycle_to_die;					// CYCLE_TO_DIE
+	unsigned int	cycle;							// Numero du cycle
 }					t_board;
 
 typedef struct		s_op
@@ -83,7 +85,7 @@ t_process		*add_process(t_lst_process *lst, int r1, unsigned int pc);
 int				init_process(t_board *board);
 void			loop_process(t_board *board);
 int				check_instruction(t_board *bd, t_process *proc);
-int				get_params(t_board *bd, t_process *proc, int *pc, int ocp);
+int				get_params(t_board *bd, t_process *proc, unsigned int *pc, int data[2]);
 
 /*
 ** Game
