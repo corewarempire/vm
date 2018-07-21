@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/20 10:35:03 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/21 09:25:13 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,19 @@ typedef struct		s_op
 /*
 ** process
 */
+
 void			set_ramvalue(t_board *bd, unsigned int pc, unsigned int value);
 t_lst_process	*init_list_process(void);
 t_process		*add_process(t_lst_process *lst, int r1, unsigned int pc);
 int				init_process(t_board *board);
 void			loop_process(t_board *board);
 int				check_instruction(t_board *bd, t_process *proc);
+int				get_params(t_board *bd, t_process *proc, int *pc, int ocp);
 
 /*
 ** Game
 */
+
 void			play(t_board *board);
 void			add(t_board *board, t_process *process);
 void			aff(t_board *board, t_process *process);
