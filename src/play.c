@@ -4,17 +4,16 @@ void	run(t_board *board)
 {
 	t_process *proc;
 
-	write(1, "START\n", 6);
+	// write(1, "START\n", 6);
 	proc = board->lst_process->process;
-//	while (board->lst_process->len)
-//	{
-		if (check_instruction(board, proc))
-		{
-			printf("CHECK PROCESS AT %u\n", proc->pc);
-		}
+	int i = 0;
+	while (board->lst_process->len && i < 25)
+	{
+		check_instruction(board, proc);
 		proc = (proc->next) ? proc->next : board->lst_process->process;
-//	}
-	write(1, "END\n", 4);
+		i++;
+	}
+	// write(1, "END\n", 4);
 }
 
 void	play(t_board *board)

@@ -32,8 +32,19 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
 							or, xor, zjmp, ldi, sti, frk, lld,
 							lldi, lfork, aff};
-
-	f[proc->op_code - 1](bd, proc);
+	if (proc->op_code && !proc->exec_cycle)
+	{
+		f[proc->op_code - 1](bd, proc);
+		proc->op_code = 0;
+	}
+	else if (proc->op_code)
+	{
+		proc->exec_cycle--;
+	}
+	else
+	{
+		proc->pc++;
+	}
 	return (1);
 }
 
@@ -46,7 +57,6 @@ void	get_instruction(t_board *bd, t_process *proc)
 	c = bd->ram[proc->pc];
 	if (c > 0 && c < 17)
 	{
-		printf("Valeur de l'octet? %u\n", c);
 		proc->exec_cycle = op_tab[c].cycles;
 		proc->op_code = op_tab[c].op_code;
 	}
@@ -57,6 +67,5 @@ int		check_instruction(t_board *bd, t_process *proc)
 	get_instruction(bd, proc);
 	if (proc->op_code)
 		exec_instruction(bd, proc);
-	// check de savoir si le processus est occupe?
 	return (1);
 }

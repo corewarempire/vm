@@ -12,9 +12,8 @@ int		init_process(t_board *board)
 	champ = board->first_champ;
 	if (!(board->lst_process = init_list_process()))
 		return (0);
-//	while (i < board->champions_count)
-//	{
-		printf("TETE DU PROCEi-SSUS %u / / p_id:%d \n", pc, champ->player_id);
+	// while (i < board->champions_count)
+	// {
 		i = champ->player_id;
 		if (!(proc = add_process(board->lst_process, i, pc)))
 			return (0);
