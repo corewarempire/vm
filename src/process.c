@@ -13,13 +13,20 @@ t_lst_process	*init_list_process(void)
 
 t_process		*new_process(unsigned int r1, unsigned int pc)
 {
+	int i;
 	t_process *new;
 
 	if (!(new = (t_process*)malloc(sizeof(t_process))))
 		return (0);
+	i = 0;
+	while (i < REG_NUMBER)
+		new[i++] = 0;
 	new->pc = pc;
 	new->r[0] = r1;
 	new->id_player = r1;
+	new->op_code = 0;
+	new->last_live = 0;
+	new->carry = 0;
 	new->next = 0;
 	return (new);
 }

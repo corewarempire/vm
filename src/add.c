@@ -11,5 +11,5 @@ void	add(t_board *bd, t_process *proc)
 	res += proc->r[bd->ram[MEM_MOD(pc + 3)] - 1];
 	proc->carry = (!res) ? 1 : 0;
 	proc->r[bd->ram[MEM_MOD(pc + 4)] - 1] = res;
-	//Octect a skip => 5
+	proc->pc += 5;
 }
