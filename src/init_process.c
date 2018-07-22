@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-int		init_process(t_board *board)
+int		init_process(t_board *bd)
 {
 	int	i;
 	int	pc;
@@ -9,16 +9,16 @@ int		init_process(t_board *board)
 
 	i = 0;
 	pc = 0;
-	champ = board->first_champ;
-	if (!(board->lst_process = init_list_process()))
+	champ = bd->first_champ;
+	if (!(bd->lst_process = init_list_process()))
 		return (0);
-	// while (i < board->champions_count)
-	// {
-		i = champ->player_id;
-		if (!(proc = add_process(board->lst_process, i, pc)))
+	while (i < bd->champions_count)
+	{
+		if (!(proc = add_process(bd->lst_process, i, pc)))
 			return (0);
-		pc += MEM_SIZE / board->champions_count;
-//		i++;
-//	}
+		proc->last_live = bd->cycle;
+		pc += MEM_SIZE / bd->champions_count;
+		i++;
+	}
 	return (1);
 }

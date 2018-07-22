@@ -1,17 +1,19 @@
 #include "corewar.h"
 
-void	run(t_board *board)
+void	run(t_board *bd)
 {
 	t_process *proc;
 
 	// write(1, "START\n", 6);
-	proc = board->lst_process->process;
-	int i = 0;
-	while (board->lst_process->len && i < 1000)
+	proc = bd->lst_process->process;
+	while (bd->lst_process->len)
 	{
-		check_instruction(board, proc);
-		proc = (proc->next) ? proc->next : board->lst_process->process;
-		i++;
+		check_instruction(bd, proc);
+		purge_process(bd);
+		if (!bd->lst_process->process)
+			break ;
+		bd->cycle++;
+		proc = (proc->next) ? proc->next : bd->lst_process->process;
 	}
 	// write(1, "END\n", 4);
 }
