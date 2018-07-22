@@ -2,10 +2,9 @@
 
 void	aff(t_board *bd, t_process *proc)
 {
-	unsigned int	pc;
 	int				r;
 
-	pc = proc->pc;
-	r = proc->r[bd->ram[MEM_MOD(pc + 2)]] % 256;
+	r = proc->r[bd->ram[MEM_MOD(proc->pc + 2)] - 1] % 256;
+	// printf("aff:\nRegistry insdex %d => %d\n", bd->ram[MEM_MOD(proc->pc + 2)], r);
 	proc->pc += 3;
 }

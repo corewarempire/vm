@@ -7,7 +7,7 @@ void	run(t_board *board)
 	// write(1, "START\n", 6);
 	proc = board->lst_process->process;
 	int i = 0;
-	while (board->lst_process->len && i < 25)
+	while (board->lst_process->len && i < 1000)
 	{
 		check_instruction(board, proc);
 		proc = (proc->next) ? proc->next : board->lst_process->process;
