@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/22 18:10:16 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/23 12:54:32 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,25 @@ typedef struct	s_lst_process
 
 typedef struct		s_champ
 {
-	char			*name;
-	char			*comment;
+	struct s_champ	*next;
 	int				player_id;
 	int				fd;
-	struct s_champ	*next;
+	char			*name;
+	char			*comment;
 }					t_champ;
 
 typedef struct		s_board
 {
-	unsigned char	*ram;							// memory
-	char			*opt_list;						// -dump etc
+	t_lst_process	*lst_process;
 	t_champ			*first_champ;					//list chainee
 	int				player_id;						//ids par defaut < 0 (vm zaz)
 	unsigned int	champions_count;
-	t_lst_process	*lst_process;
 	unsigned int	cycle_to_die;					// CYCLE_TO_DIE
 	unsigned int	cycle;							// Numero du cycle
+	int				last_live;
+	unsigned int	last_check_purge;
+	unsigned char	*ram;							// memory
+	char			*opt_list;						// -dump etc
 }					t_board;
 
 typedef struct		s_op

@@ -8,7 +8,8 @@ void	xor(t_board *bd, t_process *proc)
 	int				val2;
 
 	proc->pc++;
-	// printf("and:\n");
+	if (proc->id_player == -1)
+		printf("xor:\n");
 	ocp[0] = ocp_first(bd->ram[MEM_MOD(proc->pc)]);
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(proc->pc)]);
 	proc->pc++;

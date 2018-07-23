@@ -31,8 +31,11 @@ int main(int argc, char **argv)
 	board = init_board_data(board, argv);
 	collect_inputs(argv, board);
 	insert_instructions(board);
+	// print_memory(board);
+	printf("\n");
 	play(board);
-	// print_champ_lst(board);
+	print_champ_lst(board);
 	print_memory(board);
+	printf("Le champion gagnant:%d\n", board->last_live);
 	return (0);
 }

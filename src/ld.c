@@ -10,7 +10,8 @@ void	ld(t_board *bd, t_process *proc)
 	proc->pc++;
 	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc)]);
 	proc->pc++;
-	// printf("ld:\n");
+	if (proc->id_player == -1)
+		printf("ld\n");
 	if (!(val1 = get_params(bd, proc, &proc->pc, (int[3]){ocp, 0, 0})))
 		proc->carry = 1;
 	else
