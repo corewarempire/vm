@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/21 11:42:10 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/22 18:10:16 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_process
 typedef struct	s_lst_process
 {
 	t_process	*process;							//Liste des processus
-	int				len;							//Nombre de processus instancier
+	int			len;								//Nombre de processus instancier
 }				t_lst_process;
 
 typedef struct		s_champ
@@ -86,6 +86,7 @@ int				init_process(t_board *board);
 void			loop_process(t_board *board);
 int				check_instruction(t_board *bd, t_process *proc);
 int				get_params(t_board *bd, t_process *proc, unsigned int *pc, int data[2]);
+void			purge_process(t_board *bd);
 
 /*
 ** Game
@@ -119,6 +120,7 @@ unsigned int	ocp_third(unsigned char c);
 int				get_dir4(t_board *bd, unsigned int pos);
 short			get_dir2(t_board *bd, unsigned int pos);
 int				get_indir(t_board *bd, unsigned int pos);
+int				get_long_indir(t_board *bd, unsigned int pos);
 int 			get_reg(t_process *proc, unsigned int index);
 
 
