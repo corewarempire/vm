@@ -32,20 +32,15 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
 							or, xor, zjmp, ldi, sti, frk, lld,
 							lldi, lfork, aff};
-	// printf("op_code %s\n", op_tab[proc->op_code].name);
-	// printf("op_code %d\n", proc->op_code);
 	if (proc->op_code && !proc->exec_cycle)
 	{
 		printf("FUNCTION %s\n", op_tab[proc->op_code].name);
 		f[proc->op_code](bd, proc);
 		proc->op_code = 0;
-		// printf("END\n");
+		proc->exec_cycle = 0;
 	}
 	else if (proc->op_code)
-	{
-		// printf("dec cycles\n");
-		proc->exec_cycle--;
-	}
+		(proc->exec_cycle)--;
 	return (1);
 }
 
@@ -54,16 +49,13 @@ void	get_instruction(t_board *bd, t_process *proc)
 	unsigned char	c;
 
 	if (proc->op_code)
-	{
-		printf("have already one\n");
 		return ;
-	}
-	c = bd->ram[proc->pc];
+	c = bd->ram[MEM_MOD(proc->pc)];
 	if (c > 0 && c < 17)
 	{
 		proc->exec_cycle = op_tab[c].cycles;
 		proc->op_code = op_tab[c].op_code;
-		printf("LA %d\n", proc->op_code);
+		printf("Set new instruction %d at cycle %d, exec at %d\n", proc->op_code, bd->cycle, bd->cycle + op_tab[c].cycles);
 	}
 }
 
@@ -73,6 +65,8 @@ int		check_instruction(t_board *bd, t_process *proc)
 	if (proc->op_code)
 		exec_instruction(bd, proc);
 	else
+	{
 		proc->pc = MEM_MOD(proc->pc + 1);
+	}
 	return (1);
 }

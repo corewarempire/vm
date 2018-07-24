@@ -8,21 +8,24 @@ void	run(t_board *bd)
 	// write(1, "START\n", 6);
 	bd->last_check_purge = 0;
 	proc = bd->lst_process->process;
-	while (bd->lst_process && bd->cycle < 250)
+	while (bd->lst_process && bd->cycle < 1963)
 	{
-		check_instruction(bd, proc);
-		if (bd->last_check_purge == bd->cycle - bd->cycle_to_die)
+		while (proc)
 		{
-			purge_process(bd);
-			bd->last_check_purge = bd->cycle;
+			check_instruction(bd, proc);
+			if (bd->last_check_purge == bd->cycle - bd->cycle_to_die)
+			{
+				purge_process(bd);
+				bd->last_check_purge = bd->cycle;
+			}
+			proc = proc->next;
 		}
+		bd->cycle++;
 		if (!bd->lst_process->process)
 			break ;
-		bd->cycle++;
-		proc = (proc->next) ? proc->next : bd->lst_process->process;
+		proc = bd->lst_process->process;
 	}
-	// printf("END\n");
-	// write(1, "END\n", 4);
+	printf("Cycle atteint %d\n", bd->cycle);
 }
 
 void	play(t_board *board)
