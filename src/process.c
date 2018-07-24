@@ -27,7 +27,6 @@ t_process		*new_process(unsigned int id_process, unsigned int r1, unsigned int p
 	new->op_code = 0;
 	new->last_live = 0;
 	new->id_process = id_process;
-	printf("VALUE PROCESS %u\n", id_process);
 	new->carry = 0;
 	new->next = 0;
 	return (new);
@@ -39,7 +38,7 @@ t_process		*add_process(t_lst_process *lst, unsigned int id_process, int r1, uns
 	t_process	*new;
 
 	process = lst->process;
-	if (!(new = new_process(id_process, r1, pc)))
+	if (!(new = new_process(id_process, r1, MEM_MOD(pc))))
 		return (0);
 	if (process)
 	{
