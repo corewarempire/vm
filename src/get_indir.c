@@ -11,7 +11,7 @@ int		get_indir(t_board *bd, unsigned int pos)
 	ret = 0;
 	addr = (bd->ram[MEM_MOD(pos)] << 8) | bd->ram[MEM_MOD(pos + 1)];
 	addr = addr % IDX_MOD;
-	ret = (bd->ram[MEM_MOD(addr)] << 24)
+	ret = (bd->ram[MEM_MOD(pos + addr)] << 24)
 			| (bd->ram[MEM_MOD(pos + 1 + addr)] << 16)
 			| (bd->ram[MEM_MOD(pos + 2 + addr)] << 8)
 			| bd->ram[MEM_MOD(pos + 3 + addr)];

@@ -11,8 +11,8 @@ void	get_instruction(t_board *bd, t_process *proc)
 	{
 		proc->exec_cycle = op_tab[c].cycles;
 		proc->op_code = op_tab[c].op_code;
-		if (proc->id_player == -1)
-			printf("Set new instruction %d at cycle %d, exec at %d\n", proc->op_code, bd->cycle, bd->cycle + op_tab[c].cycles);
+		// if (proc->id_player == -1)
+			// printf("Set new instruction %d at cycle %d, exec at %d\n", proc->op_code, bd->cycle, bd->cycle + op_tab[c].cycles);
 	}
 }
 
@@ -24,13 +24,13 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	if (proc->exec_cycle == 1)
 	{
 		if (proc->id_player == -1)
-			printf("FUNCTION %s\n", op_tab[proc->op_code].name);
+			// printf("FUNCTION %s\n", op_tab[proc->op_code].name);
 		f[proc->op_code](bd, proc);
 		proc->op_code = 0;
 		proc->exec_cycle = 0;
 		get_instruction(bd, proc);
-		if (proc->id_player == -1 && proc->op_code)
-			printf("NEW instruction directly load code %d\n", proc->op_code);
+		// if (proc->id_player == -1 && proc->op_code)
+			// printf("NEW instruction directly load code %d\n", proc->op_code);
 	}
 	else
 		(proc->exec_cycle)--;
