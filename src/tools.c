@@ -13,6 +13,7 @@ void    ft_error(int id)
         ft_putstr_fd("ERROR: Memory Allocation failed\n", 2);
     else if (id == 1)
     {
+        printf("error name:%s|\n", strerror(errno));
         ft_putstr_fd("ERROR: Bad arguments.\n", 2);
         ft_usage();
     }

@@ -64,8 +64,8 @@ static int      open_champ(t_board *bd, char **argv, int i, int op)
 
 static int      get_dump(t_board *bd, char **argv, int i)
 {
-    // A faire : Stocker si memory dump
-    return (0);
+    bd->dump = ft_atoi(argv[i + 1]);
+    return (1);
 }
 
 static void     check_arg(char **argv, int *i, t_board *bd)
@@ -75,30 +75,42 @@ static void     check_arg(char **argv, int *i, t_board *bd)
 
     n = 3;
     if (argv[*i][0] == '-' && (n = pos_str_tab(argv[*i], opt_list)) == -1)
+    {
         ft_error(1);
-    else if (n == 0)
+    }
+        else if (n == 0)
     {
         if (!argv[*i + 1] || !argv[*i + 2] || !ft_onlydigit(argv[*i + 1]) ||
                 !open_champ(bd, argv, *i, 2))
+        {
             ft_error(1);
-        *i += 2;
+        }
+                *i += 1;
     }
     else if (n == 1)
     {
         if (!argv[*i + 1] || !ft_onlydigit(argv[*i + 1]) ||
             !get_dump(bd, argv, *i))
+        {
             ft_error(1);
+        }    
+            *i += 1;
     }
     else
+    {
         open_champ(bd, argv, *i, 0);
+    }
 }
 
-t_board         *collect_inputs(char **argv, t_board *bd)
+t_board         *collect_inputs(char **argv, int argc, t_board *bd)
 {
     int i;
 
-    i = 0;
-    while (argv[++i])
-            check_arg(argv, &i, bd);
-    return (bd);
+    i = 1;
+    while (argv[i] && i < argc)
+    {
+        check_arg(argv, &i, bd);
+        i++;
+    }
+        return (bd);
 }
