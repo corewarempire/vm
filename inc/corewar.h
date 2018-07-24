@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h> // temp
+# include <string.h> // temp
 # include "op.h"
 
 # define BUFF_SIZE 4
@@ -63,6 +65,7 @@ typedef struct		s_board
 	unsigned int	last_check_purge;
 	unsigned char	*ram;							// memory
 	char			*opt_list;						// -dump etc
+	int				dump;
 }					t_board;
 
 typedef struct		s_op
@@ -127,7 +130,7 @@ int 			get_reg(t_process *proc, unsigned int index);
 
 
 t_board 		*init_board_data(t_board *bd, char **argv);
-t_board 		*collect_inputs(char **argv, t_board *bd);
+t_board 		*collect_inputs(char **argv, int argc, t_board *bd);
 void 			init_f(void (*f[17])(t_board *b, int player));
 void			ft_error(int id);
 void			insert_instructions(t_board *board);
