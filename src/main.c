@@ -19,6 +19,7 @@ t_board *init_board_data(t_board *bd, char **argv)
 	bd->first_champ = NULL;
 	bd->player_id = 0;
 	bd->cycle = 0;
+	bd->id_process = 0;
 	bd->dump = -1;
 	return (bd);
 }
@@ -34,7 +35,7 @@ int main(int argc, char **argv)
 	insert_instructions(board);
 	// print_memory(board);
 	printf("\n");
-//	play(board);
+	play(board);
 //	print_champ_lst(board);
 	print_memory(board);
 	printf("Le champion gagnant:%d\n", board->last_live);

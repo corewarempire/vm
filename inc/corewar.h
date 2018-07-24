@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/23 12:54:32 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/24 14:43:00 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_process
 	int					exec_cycle;					//cycle a effectue avant une operation
 	int					op_code;					//Operation courante
 	int					last_live;					//Dernier cycle live
+	unsigned int		id_process;					//id du processus
 	unsigned int		pc;							//index dans la ram
 }				t_process;
 
@@ -61,7 +62,8 @@ typedef struct		s_board
 	unsigned int	champions_count;
 	unsigned int	cycle_to_die;					// CYCLE_TO_DIE
 	unsigned int	cycle;							// Numero du cycle
-	int				last_live;
+	unsigned int	id_process;						// ID processus track
+	unsigned int	last_live;
 	unsigned int	last_check_purge;
 	unsigned char	*ram;							// memory
 	char			*opt_list;						// -dump etc
@@ -73,7 +75,7 @@ typedef struct		s_op
 	char			*name;							//Name
 	int				argc;							//Nombre d'argument
 	int				argv[3];						//Decomposition des arguments
-	int				op_code;							//Valeur de l'opcode
+	int				op_code;						//Valeur de l'opcode
 	int				cycles;							//duree d'execution
 	char			*lname;							//Long name?
 	int				octal;							//format
@@ -86,7 +88,7 @@ typedef struct		s_op
 
 void			set_ramvalue(t_board *bd, unsigned int pc, unsigned int value);
 t_lst_process	*init_list_process(void);
-t_process		*add_process(t_lst_process *lst, int r1, unsigned int pc);
+t_process		*add_process(t_lst_process *lst, unsigned int id_process, int r1, unsigned int pc);
 int				init_process(t_board *board);
 void			loop_process(t_board *board);
 int				check_instruction(t_board *bd, t_process *proc);

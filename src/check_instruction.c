@@ -27,23 +27,6 @@ t_op	op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
 
-int		exec_instruction(t_board *bd, t_process *proc)
-{
-	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
-							or, xor, zjmp, ldi, sti, frk, lld,
-							lldi, lfork, aff};
-	if (proc->op_code && !proc->exec_cycle)
-	{
-		printf("FUNCTION %s\n", op_tab[proc->op_code].name);
-		f[proc->op_code](bd, proc);
-		proc->op_code = 0;
-		proc->exec_cycle = 0;
-	}
-	else if (proc->op_code)
-		(proc->exec_cycle)--;
-	return (1);
-}
-
 void	get_instruction(t_board *bd, t_process *proc)
 {
 	unsigned char	c;
@@ -55,8 +38,30 @@ void	get_instruction(t_board *bd, t_process *proc)
 	{
 		proc->exec_cycle = op_tab[c].cycles;
 		proc->op_code = op_tab[c].op_code;
-		printf("Set new instruction %d at cycle %d, exec at %d\n", proc->op_code, bd->cycle, bd->cycle + op_tab[c].cycles);
+		if (proc->id_player == -1)
+			printf("Set new instruction %d at cycle %d, exec at %d\n", proc->op_code, bd->cycle, bd->cycle + op_tab[c].cycles);
 	}
+}
+
+int		exec_instruction(t_board *bd, t_process *proc)
+{
+	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
+							or, xor, zjmp, ldi, sti, frk, lld,
+							lldi, lfork, aff};
+	if (proc->op_code && proc->exec_cycle == 1)
+	{
+		if (proc->id_player == -1)
+			printf("FUNCTION %s\n", op_tab[proc->op_code].name);
+		f[proc->op_code](bd, proc);
+		proc->op_code = 0;
+		proc->exec_cycle = 0;
+		get_instruction(bd, proc);
+		if (proc->id_player == -1 && proc->op_code)
+			printf("NEW instruction directly load code %d\n", proc->op_code);
+	}
+	else if (proc->op_code)
+		(proc->exec_cycle)--;
+	return (1);
 }
 
 int		check_instruction(t_board *bd, t_process *proc)

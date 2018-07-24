@@ -14,7 +14,7 @@ int		init_process(t_board *bd)
 		return (0);
 	while (i < bd->champions_count)
 	{
-		if (!(proc = add_process(bd->lst_process, champ->player_id, pc)))
+		if (!(proc = add_process(bd->lst_process, bd->id_process++, champ->player_id, pc)))
 			return (0);
 		proc->last_live = bd->cycle;
 		pc += MEM_SIZE / bd->champions_count;

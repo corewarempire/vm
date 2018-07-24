@@ -5,10 +5,10 @@ void	run(t_board *bd)
 	unsigned int	last_check_purge;
 	t_process		*proc;
 
-	// write(1, "START\n", 6);
+	write(1, "START\n", 6);
 	bd->last_check_purge = 0;
 	proc = bd->lst_process->process;
-	while (bd->lst_process && bd->cycle < 1963)
+	while (bd->lst_process && bd->cycle < 1756)
 	{
 		while (proc)
 		{

@@ -11,7 +11,7 @@ t_lst_process	*init_list_process(void)
 	return (lst);
 }
 
-t_process		*new_process(unsigned int r1, unsigned int pc)
+t_process		*new_process(unsigned int id_process, unsigned int r1, unsigned int pc)
 {
 	int i;
 	t_process *new;
@@ -26,29 +26,32 @@ t_process		*new_process(unsigned int r1, unsigned int pc)
 	new->id_player = r1;
 	new->op_code = 0;
 	new->last_live = 0;
+	new->id_process = id_process;
+	printf("VALUE PROCESS %u\n", id_process);
 	new->carry = 0;
 	new->next = 0;
 	return (new);
 }
 
-t_process		*add_process(t_lst_process *lst, int r1, unsigned int pc)
+t_process		*add_process(t_lst_process *lst, unsigned int id_process, int r1, unsigned int pc)
 {
 	t_process	*process;
+	t_process	*new;
 
 	process = lst->process;
+	if (!(new = new_process(id_process, r1, pc)))
+		return (0);
 	if (process)
 	{
-		while (process->next)
-			process = process->next;
-		if (!(process->next = new_process(r1, pc)))
-			return (0);
+		new->next = process;
+		lst->process = new;
 		lst->len++;
-		return (process->next);
+		return (new);
 	}
 	else
 	{
-		lst->process = new_process(r1, pc);
+		lst->process = new;
 		lst->len++;
-		return (lst->process);
+		return (new);
 	}
 }
