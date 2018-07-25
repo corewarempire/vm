@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/24 15:54:32 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/25 13:37:55 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,8 @@ unsigned int	ocp_scd(unsigned char c);
 unsigned int	ocp_third(unsigned char c);
 int				get_dir4(t_board *bd, unsigned int pos);
 short			get_dir2(t_board *bd, unsigned int pos);
-int				get_indir(t_board *bd, unsigned int pos);
-int				get_long_indir(t_board *bd, unsigned int pos);
+int				get_indir(t_board *bd, t_process *proc, unsigned int pos);
+int				get_long_indir(t_board *bd, t_process *proc, unsigned int pos);
 int 			get_reg(t_process *proc, unsigned int index);
 
 
