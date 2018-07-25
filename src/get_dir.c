@@ -19,6 +19,7 @@ short	get_dir2(t_board *bd, unsigned int pos)
 	short ret;
 
 	ret = 0;
-	ret = (bd->ram[MEM_MOD(pos)] << 8) | bd->ram[MEM_MOD(pos + 1)];
+	ret = (bd->ram[MEM_MOD(pos)] << 8)
+			| bd->ram[MEM_MOD(pos + 1)];
 	return (ret);
 }
