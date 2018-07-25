@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/25 13:37:55 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/25 16:18:21 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "op.h"
 
 # define BUFF_SIZE 4
-# define MEM_MOD(x) (x % MEM_SIZE)
+# define MEM_MOD(x) ((x) % MEM_SIZE)
 
 typedef struct	s_process
 {
