@@ -4,7 +4,7 @@ char	*get_name_champ(t_board *bd, int id)
 {
 	t_champ *champ;
 
-	champ = bd->champ;
+	champ = bd->first_champ;
 	while (champ)
 	{
 		if (champ->player_id == id)

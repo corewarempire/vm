@@ -2,26 +2,41 @@
 
 void    ft_usage(void)
 {
-    ft_putstr("./corewar [-d, -n] <champion1.cor> <...> [4 .cor maximum]\n");
+    ft_putstr("./corewar [-d, -n, -v] <champion1.cor> <..> [4 .cor maximum]\n");
     ft_putstr("-d N : Dump Memory at N cycles\n");
     ft_putstr("-n N <champ.cor> : Attribute N as player number to champ.cor\n");
     ft_putstr("-v N : Display level [1 - 4]:\n\t1:Only Winner\n\t1:Cycles");
     ft_putstr("\n\t2: Operations \n\t3:Memory each CYCLE_TO_DEATH");
 }
 
-void    ft_error(int id)
+int    ft_error(int id)
 {
-    if (id == 0)
-        ft_putstr_fd("ERROR: Memory Allocation failed\n", 2);
-    else if (id == 1)
+    if (id == 1)
     {
-        printf("error name:%s|\n", strerror(errno));
-        ft_putstr_fd("ERROR: Bad arguments.\n", 2);
-        ft_usage();
+        ft_putstr_fd("ERROR: Memory Allocation failed.\n", 2);
     }
     else if (id == 2)
-        ft_putstr_fd("ERROR: Wrong Magic number\n", 2);
-    exit(0);
+    {
+        ft_putstr_fd("ERROR: bad flag.\n", 2);
+        ft_usage();
+    }
+        else if (id == 3)
+    {
+        ft_putstr_fd("ERROR in: Malloc / -n flag / champion.cor file.\n", 2);
+        ft_usage();
+    }        
+    else if (id == 4 || id == 5)
+    {
+        id == 4 ? ft_putstr_fd("ERROR: Bad dump (-d) data.\n", 2) :
+        ft_putstr_fd("ERROR:Bad verbose (-v) data.\n", 2);
+        ft_usage();
+    }
+    else if (id == 6)
+    {
+        ft_putstr_fd("ERROR: Bad champion count.\n", 2);
+        ft_usage();
+    }
+    return (0);
 }
 
 void    print_memory(t_board *bd)
