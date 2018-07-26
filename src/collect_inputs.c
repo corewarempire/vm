@@ -39,13 +39,32 @@ t_champ     *collect_champion_data(t_board *bd, int fd, t_champ *champ)
     champ->next = NULL;
     return (champ);
 }
-
-static void     attribute_id(t_board *bd, t_champ *champ, int op, char **argv)
+int             get_first_number(t_board *bd, int i)
 {
-    // A faire : Gerer l'attribution d'ID (doublons !)
-    // Actuellement attribution decroissante depuis 0, comme zaz.
-    champ->player_id = --bd->player_id;
+    t_champ *tmp;
+
+    tmp  = bd->first_champ;
+    while (tmp)
+    {
+        if (i == tmp->player_id)
+        {
+            i++;
+            tmp = bd->first_champ;
+        }
+        else
+            tmp = tmp->next;
+    }
+    return (i);
 }
+
+static void     attribute_id(t_board *bd, t_champ *champ, int t[2], char **argv)
+{
+    if (!t[1])
+        champ->player_id = get_first_number(bd, 1);
+    else
+        champ->player_id = get_first_number(bd, ft_atoi(argv[t[0] + t[1]]));
+}
+
 static int      open_champ(t_board *bd, char **argv, int i, int op)
 {
     int fd;
@@ -57,7 +76,7 @@ static int      open_champ(t_board *bd, char **argv, int i, int op)
     if ((fd = open(argv[i + op], O_RDONLY)) == -1)
         ft_error(1);
     champ = collect_champion_data(bd, fd, champ);
-    attribute_id(bd, champ, op, argv);
+    attribute_id(bd, champ, (int[2]){i, op}, argv);
     add_champ_to_lst(bd, champ);
     return (1);
 }

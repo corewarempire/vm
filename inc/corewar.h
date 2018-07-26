@@ -58,7 +58,6 @@ typedef struct		s_board
 {
 	t_lst_process	*lst_process;
 	t_champ			*first_champ;					//list chainee
-	int				player_id;						//ids par defaut < 0 (vm zaz)
 	unsigned int	champions_count;
 	unsigned int	cycle_to_die;					// CYCLE_TO_DIE
 	unsigned int	cycle;							// Numero du cycle

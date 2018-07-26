@@ -17,7 +17,6 @@ t_board *init_board_data(t_board *bd, char **argv)
 		ft_error(1);
 	bd->opt_list = NULL;
 	bd->first_champ = NULL;
-	bd->player_id = 0;
 	bd->cycle = 0;
 	bd->id_process = 0;
 	bd->dump = -1;
