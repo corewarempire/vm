@@ -62,7 +62,7 @@ static void     attribute_id(t_board *bd, t_champ *champ, int t[2], char **argv)
     if (!t[1])
         champ->player_id = get_first_number(bd, 1);
     else
-        champ->player_id = get_first_number(bd, ft_atoi(argv[t[0] + t[1]]));
+        champ->player_id = get_first_number(bd, ft_atoi(argv[t[0] + 1]));
 }
 
 static int      open_champ(t_board *bd, char **argv, int i, int op)
@@ -75,8 +75,12 @@ static int      open_champ(t_board *bd, char **argv, int i, int op)
         return (0);
     if ((fd = open(argv[i + op], O_RDONLY)) == -1)
         ft_error(1);
-    champ = collect_champion_data(bd, fd, champ);
+        champ = collect_champion_data(bd, fd, champ);
+
+
     attribute_id(bd, champ, (int[2]){i, op}, argv);
+    
+    
     add_champ_to_lst(bd, champ);
     return (1);
 }
@@ -97,15 +101,20 @@ static void     check_arg(char **argv, int *i, t_board *bd)
     {
         ft_error(1);
     }
-        else if (n == 0)
+    
+    
+    
+    else if (n == 0)
     {
         if (!argv[*i + 1] || !argv[*i + 2] || !ft_onlydigit(argv[*i + 1]) ||
                 !open_champ(bd, argv, *i, 2))
         {
             ft_error(1);
         }
-                *i += 1;
+                *i += 2;
     }
+
+
     else if (n == 1)
     {
         if (!argv[*i + 1] || !ft_onlydigit(argv[*i + 1]) ||

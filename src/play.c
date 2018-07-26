@@ -27,8 +27,8 @@ void	run(t_board *bd)
 		while (proc)
 		{
 			check_instruction(bd, proc);
-			printf("Process:[%d], PC:[%d] Function:[%s], ", proc->id_player, proc->pc, op_tab[proc->op_code].name);
-			printf("Cycle:%d, Cycle to die:%d, NBR_LIVE:%d, NBR_CHECK:%d\n", bd->cycle, bd->cycle_to_die, bd->total_cycle_live, bd->check_nbr);
+			// printf("Process:[%d], PC:[%d] Function:[%s], ", proc->id_player, proc->pc, op_tab[proc->op_code].name);
+			// printf("Cycle:%d, Cycle to die:%d, NBR_LIVE:%d, NBR_CHECK:%d\n", bd->cycle, bd->cycle_to_die, bd->total_cycle_live, bd->check_nbr);
 			proc = proc->next;
 		}
 		if ((bd->last_check_purge == bd->cycle - bd->cycle_to_die && 
