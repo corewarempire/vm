@@ -21,14 +21,16 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
 							or, xor, zjmp, ldi, sti, frk, lld,
 							lldi, lfork, aff};
+	
 	if (proc->exec_cycle == 1)
 	{
-		if (proc->id_player == -1)
-			// printf("FUNCTION %s\n", op_tab[proc->op_code].name);
 		f[proc->op_code](bd, proc);
 		proc->op_code = 0;
 		proc->exec_cycle = 0;
 		get_instruction(bd, proc);
+		printf("Process:[%d], PC:[%d] Function:[%s], ", proc->id_player, proc->pc, op_tab[proc->op_code].name);
+		printf("Cycle:%d, Cycle to die:%d, NBR_LIVE:%d, NBR_CHECK:%d\n", bd->cycle, bd->cycle_to_die, bd->total_cycle_live, bd->check_nbr);
+
 		// if (proc->id_player == -1 && proc->op_code)
 			// printf("NEW instruction directly load code %d\n", proc->op_code);
 	}

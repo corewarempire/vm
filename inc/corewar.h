@@ -58,14 +58,15 @@ typedef struct		s_board
 {
 	t_lst_process	*lst_process;
 	t_champ			*first_champ;					//list chainee
-	int				player_id;						//ids par defaut < 0 (vm zaz)
 	unsigned int	champions_count;
-	unsigned int	cycle_to_die;					// CYCLE_TO_DIE
 	unsigned int	cycle;							// Numero du cycle
 	unsigned int	id_process;						// ID processus track
 	unsigned int	last_live;
 	unsigned int	last_check_purge;
+	unsigned int	check_nbr;
+	unsigned int	total_cycle_live;
 	unsigned char	*ram;							// memory
+	int				cycle_to_die;					// CYCLE_TO_DIE
 	char			*opt_list;						// -dump etc
 	int				dump;
 }					t_board;
