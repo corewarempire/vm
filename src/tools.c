@@ -28,6 +28,11 @@ void    print_memory(t_board *bd)
     unsigned char j;
 
     i = 0;
+    if (bd->cycle == bd->dump)
+    {
+        print_champ_lst(bd);
+        ft_putchar('\n');
+    }
     while (i != MEM_SIZE)
     {
         j = (bd->ram[i] / 16) + 48;        
@@ -49,8 +54,15 @@ void   print_champ_lst(t_board *bd)
     tmp = bd->first_champ;
     while (tmp)
     {
-        printf("\nChamp name:%s|\nChamp p_id:%d|\n", tmp->name, tmp->player_id);
-        printf("Champ fd:%d|\nChamp comment :%s|\n", tmp->fd, tmp->comment);
+        ft_putstr("Champion name: [");
+        ft_putstr(tmp->name);
+        ft_putstr("] Player id: [");
+        ft_putnbr(tmp->player_id);
+        ft_putstr("] \n");
         tmp = tmp->next;
     }
+//    printf("---TOOLS DISPLAY ---\nCycle:%d, Cycle to die:%d, NBR_LIVE:%d, NBR_CHECK:%d\n---END OF---\n", bd->cycle, bd->cycle_to_die, bd->total_cycle_live, bd->check_nbr);
+    ft_putstr("Nombre de cycles écoulés: ");
+    ft_putnbr(bd->cycle);
+    ft_putstr("\n");
 }

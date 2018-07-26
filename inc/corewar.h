@@ -65,6 +65,8 @@ typedef struct		s_board
 	unsigned int	id_process;						// ID processus track
 	unsigned int	last_live;
 	unsigned int	last_check_purge;
+	unsigned int	check_nbr;
+	unsigned int	total_cycle_live;
 	unsigned char	*ram;							// memory
 	char			*opt_list;						// -dump etc
 	int				dump;
