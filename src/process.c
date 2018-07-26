@@ -11,10 +11,11 @@ t_lst_process	*init_list_process(void)
 	return (lst);
 }
 
-t_process		*new_process(unsigned int id_process, unsigned int r1, unsigned int pc)
+t_process		*new_process(unsigned int id_process,
+	unsigned int r1, unsigned int pc)
 {
-	int i;
-	t_process *new;
+	int			i;
+	t_process	*new;
 
 	if (!(new = (t_process*)malloc(sizeof(t_process))))
 		return (0);
@@ -32,7 +33,8 @@ t_process		*new_process(unsigned int id_process, unsigned int r1, unsigned int p
 	return (new);
 }
 
-t_process		*add_process(t_lst_process *lst, unsigned int id_process, int r1, unsigned int pc)
+t_process		*add_process(t_lst_process *lst,
+	unsigned int id_process, int r1, unsigned int pc)
 {
 	t_process	*process;
 	t_process	*new;

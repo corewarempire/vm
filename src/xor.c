@@ -8,7 +8,6 @@ void	xor(t_board *bd, t_process *proc)
 	int				val2;
 
 	pc = proc->pc;
-	printf("or:\n");
 	pc++;
 	ocp[0] = ocp_first(bd->ram[MEM_MOD(pc)]);
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(pc)]);
