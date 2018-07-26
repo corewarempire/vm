@@ -21,10 +21,9 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
 							or, xor, zjmp, ldi, sti, frk, lld,
 							lldi, lfork, aff};
+	
 	if (proc->exec_cycle == 1)
 	{
-		if (proc->id_player == -1)
-			// printf("FUNCTION %s\n", op_tab[proc->op_code].name);
 		f[proc->op_code](bd, proc);
 		proc->op_code = 0;
 		proc->exec_cycle = 0;
