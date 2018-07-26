@@ -14,11 +14,14 @@
 
 int		ft_onlydigit(char *str)
 {
-	while (*str != '\0')
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(*str))
+		if ((!ft_isdigit(str[i])) && !(i == 0 && str[i] == '-'))
 			return (0);
-		str++;
+		i++;
 	}
 	return (1);
 }
