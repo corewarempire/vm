@@ -32,12 +32,12 @@ void	run(t_board *bd)
 			proc = proc->next;
 		}
 		if ((bd->last_check_purge == bd->cycle - bd->cycle_to_die && 
-				!check_process_status(bd)))
+				!check_process_status(bd)) || (bd->cycle_to_die <= 0))
 			break ;
 		bd->cycle++;
 		proc = bd->lst_process->process;
 	}
-	// printf("Cycle atteint %d\n", bd->cycle);
+	//printf("Cycle atteint %d\n", bd->cycle);
 }
 
 void	play(t_board *board)
