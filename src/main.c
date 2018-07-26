@@ -43,16 +43,14 @@ int main(int argc, char **argv)
 		ft_usage();
 		return (-1);
 	}
-	// erreur affichees sauf pour init_board_data -- only memory to manage
-	if (!(board = init_board_data(board, argv)) || !collect_inputs(argv, argc, board) ||
+	if (!(board = init_board_data(board, argv)) ||
+			!collect_inputs(argv, argc, board) ||
 			!insert_instructions(board))
-		return (error_management(board));
-		printf("MAIN MOTHA FUCKA\n");        
-		
+		return (error_management(board));		
 	// print_champ_lst(board);
-	print_memory(board);
-	// play(board);
 	// print_memory(board);
+	play(board);
+	print_memory(board);
 	printf("Le champion gagnant:%d\n", board->last_live);
 	printf("verbosity_level:%d|\n", board->verbose_level);
 	return (0);
