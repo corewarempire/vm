@@ -17,8 +17,8 @@ void	lld(t_board *bd, t_process *proc)
 	else
 		printf("dir:");
 	proc->carry = (!(val1 = get_params(bd, proc, &pc, (int[3]){ocp, 0, 1}))) ? 1 : 0;
-	proc->r[bd->ram[MEM_MOD(pc)] - 1] = val1;
-	printf("Store value %d to registry index %d\n", val1, bd->ram[MEM_MOD(pc)] - 1);
+	proc->r[bd->ram[MEM_MOD(pc)] - 1] = (val1);
+	printf("Store value %d to registry index %d\n", proc->r[bd->ram[MEM_MOD(pc)] - 1], bd->ram[MEM_MOD(pc)] - 1);
 	pc++;
 	proc->pc = pc;
 }
