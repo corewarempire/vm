@@ -66,9 +66,10 @@ typedef struct		s_board
 	unsigned int	check_nbr;
 	unsigned int	total_cycle_live;
 	unsigned char	*ram;
-	int				cycle_to_die;
-	char			*opt_list;
 	int				dump;
+	int				cycle_to_die;
+	int				verbose_level;
+	char			*opt_list;
 }					t_board;
 
 typedef struct		s_op

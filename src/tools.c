@@ -5,6 +5,8 @@ void    ft_usage(void)
     ft_putstr("./corewar [-d, -n] <champion1.cor> <...> [4 .cor maximum]\n");
     ft_putstr("-d N : Dump Memory at N cycles\n");
     ft_putstr("-n N <champ.cor> : Attribute N as player number to champ.cor\n");
+    ft_putstr("-v N : Display level [1 - 4]:\n\t1:Only Winner\n\t1:Cycles");
+    ft_putstr("\n\t2: Operations \n\t3:Memory each CYCLE_TO_DEATH");
 }
 
 void    ft_error(int id)
@@ -61,7 +63,6 @@ void   print_champ_lst(t_board *bd)
         ft_putstr("] \n");
         tmp = tmp->next;
     }
-//    printf("---TOOLS DISPLAY ---\nCycle:%d, Cycle to die:%d, NBR_LIVE:%d, NBR_CHECK:%d\n---END OF---\n", bd->cycle, bd->cycle_to_die, bd->total_cycle_live, bd->check_nbr);
     ft_putstr("Nombre de cycles écoulés: ");
     ft_putnbr(bd->cycle);
     ft_putstr("\n");

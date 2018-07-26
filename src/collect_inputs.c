@@ -91,43 +91,55 @@ static int      get_dump(t_board *bd, char **argv, int i)
     return (1);
 }
 
+static int     get_verbose(t_board *bd, char *arg)
+{
+    int level;
+
+    level = ft_atoi(arg);
+    if (level < 0 || level > 4)
+        return (0);
+    else
+        bd->verbose_level = level;
+    return (1);
+}
+
 static void     check_arg(char **argv, int *i, t_board *bd)
 {
-    static char *opt_list[3] = {"-n", "-dump"};
+    static char *opt_list[3] = {"-n", "-d", "-v"};
     int         n;
 
-    n = 3;
+    n = 4;
     if (argv[*i][0] == '-' && (n = pos_str_tab(argv[*i], opt_list)) == -1)
-    {
         ft_error(1);
-    }
-    
-    
-    
     else if (n == 0)
     {
         if (!argv[*i + 1] || !argv[*i + 2] || !ft_onlydigit(argv[*i + 1]) ||
                 !open_champ(bd, argv, *i, 2))
-        {
             ft_error(1);
-        }
                 *i += 2;
     }
-
-
     else if (n == 1)
     {
         if (!argv[*i + 1] || !ft_onlydigit(argv[*i + 1]) ||
-            !get_dump(bd, argv, *i))
-        {
+                !get_dump(bd, argv, *i))
             ft_error(1);
-        }    
             *i += 1;
     }
-    else
+    else if (n == 2)
     {
+        
+        
+        if (!argv[*i + 1] || !ft_onlydigit(argv[*i +1]) ||
+                !get_verbose(bd, argv[*i + 1]))
+            ft_error(1);
+            *i += 1;
+    
+    
+    
+    
+        }
+    else
         open_champ(bd, argv, *i, 0);
-    }
 }
 
 t_board         *collect_inputs(char **argv, int argc, t_board *bd)

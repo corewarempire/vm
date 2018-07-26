@@ -22,6 +22,7 @@ t_board *init_board_data(t_board *bd, char **argv)
 	bd->dump = -1;
 	bd->total_cycle_live = 0;
 	bd->check_nbr = 0;
+	bd->verbose_level = 0;
 	return (bd);
 }
 
@@ -39,5 +40,6 @@ int main(int argc, char **argv)
 	//play(board);
 	//print_memory(board);
 	printf("Le champion gagnant:%d\n", board->last_live);
+	printf("verbosity_level:%d|\n", board->verbose_level);
 	return (0);
 }
