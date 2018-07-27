@@ -14,6 +14,8 @@ INC_PATH = ./inc
 OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
+# .o de la lib dans la lib / inc ne verifie pas si recompile pas avec un make
+
 SRC_NAME =	main.c tools.c		insert_instructions.c \
 			collect_inputs.c	play.c \
 			init_process.c		check_instruction.c \
