@@ -40,6 +40,7 @@ int     collect_champion_data(t_board *bd, int fd, t_champ **champ)
         return (ft_error(1, 0));
     (*champ)->fd = fd;
     (*champ)->next = NULL;
+	(*champ)->process_count = 1;
     return (1);
 }
 int             get_first_number(t_board *bd, int i)
@@ -48,19 +49,24 @@ int             get_first_number(t_board *bd, int i)
 
     tmp  = bd->first_champ;
     while (tmp)
-        if (i++ == tmp->player_id)
+        if (i == tmp->player_id && (i += 1))
             tmp = bd->first_champ;
         else
             tmp = tmp->next;
     return (i);
 }
 
-static void     attribute_id(t_board *bd, t_champ *champ, int t[2], char **argv)
+static int     attribute_id(t_board *bd, t_champ *champ, int t[2], char **argv)
 {
     if (!t[1])
         champ->player_id = get_first_number(bd, 1);
     else
+    {
+        if (ft_atoi(argv[t[0] + 1]) < -16 || ft_atoi(argv[t[0] + 1]) > 16 )
+            return(ft_error(2, 0));
         champ->player_id = get_first_number(bd, ft_atoi(argv[t[0] + 1]));
+    }
+    return (1);
 }
 
 static int      open_champ(t_board *bd, char **argv, int i, int op)
@@ -75,7 +81,8 @@ static int      open_champ(t_board *bd, char **argv, int i, int op)
         return (ft_error(3, 1));
     if (!(collect_champion_data(bd, fd, &champ)))
         return (0);
-    attribute_id(bd, champ, (int[2]){i, op}, argv);
+    if (!(attribute_id(bd, champ, (int[2]){i, op}, argv)))
+        return (0);
     add_champ_to_lst(bd, champ);
     return (1);
 }
@@ -95,8 +102,7 @@ static int     get_verbose(t_board *bd, char *arg)
     level = ft_atoi(arg);
     if (level < 0 || level > 4)
         return (0);
-    else
-        bd->verbose_level = level;
+    bd->verbose[level] = 1;
     return (1);
 }
 
@@ -120,7 +126,7 @@ static int      check_arg(t_board *bd, char **argv, int *i)
             return (ft_error(2, 0));
         if (!open_champ(bd, argv, *i, 2))
             return (0);
-        i += 2;
+        *i += 2;
     }
     else if (n == 1)
     {

@@ -1,5 +1,22 @@
 #include "corewar.h"
 
+void	update_process_count(t_board *bd, int id, int op)
+{
+	t_champ *tmp;
+
+	tmp = bd->first_champ;
+	while (tmp)
+	{
+		if (id == tmp->player_id)
+		{
+			tmp->process_count += op;
+			break ;
+		}
+		else
+			tmp = tmp->next;
+	}
+}
+
 t_lst_process	*init_list_process(void)
 {
 	t_lst_process *lst;

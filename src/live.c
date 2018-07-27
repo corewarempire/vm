@@ -10,4 +10,5 @@ void	live(t_board *bd, t_process *proc)
 	proc->last_live = bd->cycle;
 	bd->total_cycle_live += 1;
 	bd->last_live = val;
+	// checker si val correspond bien a un joueur
 }

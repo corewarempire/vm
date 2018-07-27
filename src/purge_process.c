@@ -46,7 +46,10 @@ void	purge_process(t_board *bd)
 	while (proc)
 	{
 		if (proc->last_live <= bd->last_check_purge)
+		{
+			update_process_count(bd, proc->id_player, -1);
 			pkill(bd, &last, &proc);
+		}
 		else
 		{
 			last = proc;

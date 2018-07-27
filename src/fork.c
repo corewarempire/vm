@@ -13,4 +13,5 @@ void	frk(t_board *bd, t_process *proc)
 		printf("FAILED TO CREATE FORK NEED TO EXIT\n");
 	new->pc = newpc;
 	proc->pc = pc;
+	update_process_count(bd, proc->id_player, 1);
 }

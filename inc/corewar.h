@@ -50,6 +50,7 @@ typedef struct		s_champ
 	struct s_champ	*next;
 	int				player_id;
 	int				fd;
+	int				process_count;
 	char			*name;
 	char			*comment;
 }					t_champ;
@@ -68,8 +69,8 @@ typedef struct		s_board
 	unsigned char	*ram;
 	int				dump;
 	int				cycle_to_die;
-	int				verbose_level;
 	char			*opt_list;
+	char			*verbose;
 }					t_board;
 
 typedef struct		s_op
@@ -114,6 +115,7 @@ static const t_op	g_op_tab[17] =
 t_lst_process		*init_list_process(void);
 t_process			*add_process(t_lst_process *lst,
 						unsigned int id_process, int r1, unsigned int pc);
+void				update_process_count(t_board *bd, int id, int op);
 void				set_ramvalue(t_board *bd,
 						unsigned int pc, unsigned int value);
 void				loop_process(t_board *board);
@@ -157,8 +159,9 @@ t_board				*collect_inputs(char **argv, int argc, t_board *bd);
 void				init_f(void (*f[17])(t_board *b, int player));
 int					ft_error(int id, int errn);
 int					insert_instructions(t_board *board);
-void				print_memory(t_board *bd);
+void				print_memory(t_board *bd, int id);
 void				print_champ_lst(t_board *bd);
+void    			print_verbose_data(t_board *bd);
 void    			ft_usage(void);
 
 void				ft_put3str(char const *s, char *s2, char *s3);
