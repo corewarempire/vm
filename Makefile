@@ -38,7 +38,7 @@ LIB_NAME = 	ft_putchar.c ft_putstr.c ft_chardup.c ft_strdup.c \
 			ft_puttable.c get_next_line.c ft_strsub.c ft_strchr.c \
 			ft_memcpy.c ft_itoa_hex_byte.c ft_retcmd.c pos_str_tab.c \
 			ft_putstr_fd.c ft_bzero.c ft_putchar_fd.c ft_isdigit.c \
-			ft_atoi_base.c ft_put3str.c \
+			ft_atoi_base.c ft_put3str.c ft_isnumber.c \
 
 INC_NAME = corewar.h
 
