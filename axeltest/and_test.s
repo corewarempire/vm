@@ -4,7 +4,10 @@
 #sti	r1, %:live, %1			;change live by the right value
 ld %5, r4
 ld %6, r5
-add r4, r5, r6
+and r4, r5, r6
+and %10, r5, r6
+and 10, r5, r6
+and r4, 0, r6
 
 #live:
 #live %1

@@ -19,4 +19,6 @@ void	ldi(t_board *bd, t_process *proc)
 	else
 		proc->carry = 0;
 	proc->pc++;
+	if (!bd->verbose[1])
+		return ;
 }

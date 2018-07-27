@@ -40,7 +40,8 @@ LIB_NAME = 	ft_putchar.c ft_putstr.c ft_chardup.c ft_strdup.c \
 			ft_puttable.c get_next_line.c ft_strsub.c ft_strchr.c \
 			ft_memcpy.c ft_itoa_hex_byte.c ft_retcmd.c pos_str_tab.c \
 			ft_putstr_fd.c ft_bzero.c ft_putchar_fd.c ft_isdigit.c \
-			ft_atoi_base.c ft_put3str.c ft_isnumber.c \
+			ft_atoi_base.c ft_put3str.c ft_isnumber.c ft_putstrnbrstr.c \
+			ft_putnbrstrnbr.c \
 
 INC_NAME = corewar.h
 
@@ -50,7 +51,7 @@ OBJLIB_NAME = $(LIB_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
 
 all: $(NAME)

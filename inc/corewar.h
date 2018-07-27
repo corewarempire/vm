@@ -164,6 +164,8 @@ void				print_champ_lst(t_board *bd);
 void    			print_verbose_data(t_board *bd);
 void    			ft_usage(void);
 
+void				ft_putnbrstrnbr(int nb, char *str, int n);
+void				ft_putstrnbrstr(char  *s, int nb, char *str);
 void				ft_put3str(char const *s, char *s2, char *s3);
 void				ft_bzero(void *s, size_t n);
 void				ft_putchar_fd(char c, int fd);
