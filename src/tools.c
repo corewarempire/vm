@@ -2,40 +2,41 @@
 
 void    ft_usage(void)
 {
-    ft_putstr("./corewar [-d, -n, -v] <champion1.cor> <..> [4 .cor maximum]\n");
-    ft_putstr("-d N : Dump Memory at N cycles\n");
+    ft_putstr("./corewar [-d, -n, -v] <champion1.cor> <..> [1 - 4 .cor]\n");
+    ft_putstr("-d N : Dump Memory at N cycles [0 - ...]\n");
     ft_putstr("-n N <champ.cor> : Attribute N as player number to champ.cor\n");
     ft_putstr("-v N : Display level [1 - 4]:\n\t1:Only Winner\n\t1:Cycles");
-    ft_putstr("\n\t2: Operations \n\t3:Memory each CYCLE_TO_DEATH");
+    ft_putstr("\n\t2: Operations \n\t3:Memory each CYCLE_TO_DEATH\n");
 }
 
-int    ft_error(int id)
+int    ft_error(int id, int errn)
 {
     if (id == 1)
     {
-        ft_putstr_fd("ERROR: Memory Allocation failed.\n", 2);
+        ft_putstr_fd("ERROR: Memory Allocation failed.\n\n", 2);
     }
     else if (id == 2)
     {
-        ft_putstr_fd("ERROR: bad flag.\n", 2);
-        ft_usage();
+        ft_putstr_fd("ERROR: Wrong flag usage.\n\n", 2);
     }
         else if (id == 3)
     {
-        ft_putstr_fd("ERROR in: Malloc / -n flag / champion.cor file.\n", 2);
-        ft_usage();
+        ft_putstr_fd("ERROR : Wrong [champion].cor file", 2);
+        if (errn == 1)
+            ft_put3str(" -> ", strerror(errno), ".\n\n");
+        else
+            ft_putstr(".\n\n");
     }        
     else if (id == 4 || id == 5)
     {
-        id == 4 ? ft_putstr_fd("ERROR: Bad dump (-d) data.\n", 2) :
-        ft_putstr_fd("ERROR:Bad verbose (-v) data.\n", 2);
-        ft_usage();
+        id == 4 ? ft_putstr_fd("ERROR: Bad dump (-d) data.\n\n", 2) :
+        ft_putstr_fd("ERROR:Bad verbose (-v) data.\n\n", 2);
     }
     else if (id == 6)
     {
-        ft_putstr_fd("ERROR: Bad champion count.\n", 2);
-        ft_usage();
+        ft_putstr_fd("ERROR: Wrong [champion].cor count [1 - 4]\n\n", 2);
     }
+    ft_usage();
     return (0);
 }
 

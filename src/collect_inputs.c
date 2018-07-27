@@ -6,9 +6,7 @@ void        add_champ_to_lst(t_board *bd, t_champ *champ)
 
     tmp = bd->first_champ;
     if (!bd->first_champ)
-    {
         bd->first_champ = champ;
-    }
     else
     {
         while (tmp->next != NULL)
@@ -17,30 +15,32 @@ void        add_champ_to_lst(t_board *bd, t_champ *champ)
     }
 }
 
-t_champ     *collect_champion_data(t_board *bd, int fd, t_champ *champ)
+int     collect_champion_data(t_board *bd, int fd, t_champ **champ)
 {
     unsigned char   magic[5];
     char            str[PROG_NAME_LENGTH + 1];
     char            comment[COMMENT_LENGTH + 1];
 
-    if (!(champ = (t_champ *)malloc(sizeof(t_champ))) || read(fd, magic, 4) < 4)
-        return (NULL);
+    if (!((*champ) = (t_champ *)malloc(sizeof(t_champ))))
+        return (ft_error(1, 0));
+    if (read(fd, magic, 4) == -1)
+        return (ft_error(3, 1));
     if (!((int)magic[1] == 234 && (int)magic[2] == 131 && (int)magic[3] == 243))
-        return (NULL);
+        return (ft_error(3, 0));
     if (read(fd, str, PROG_NAME_LENGTH) == -1)
-        return (NULL);
+        return (ft_error(3, 1));
     str[PROG_NAME_LENGTH] = '\0';
-    if (!(champ->name = ft_strdup(str)))
-        return (NULL);
+    if (!((*champ)->name = ft_strdup(str)))
+        return (ft_error(1, 0));
     lseek(fd, PROG_NAME_LENGTH + 4 + 8, SEEK_SET);
     if (read(fd, comment, COMMENT_LENGTH) == -1)
-        return (NULL);
+        return (ft_error(3, 1));
     comment[COMMENT_LENGTH] = '\0';
-    if (!(champ->comment = ft_strdup(comment)))
-        return (NULL);
-    champ->fd = fd;
-    champ->next = NULL;
-    return (champ);
+    if (!((*champ)->comment = ft_strdup(comment)))
+        return (ft_error(1, 0));
+    (*champ)->fd = fd;
+    (*champ)->next = NULL;
+    return (1);
 }
 int             get_first_number(t_board *bd, int i)
 {
@@ -48,15 +48,10 @@ int             get_first_number(t_board *bd, int i)
 
     tmp  = bd->first_champ;
     while (tmp)
-    {
-        if (i == tmp->player_id)
-        {
-            i++;
+        if (i++ == tmp->player_id)
             tmp = bd->first_champ;
-        }
         else
             tmp = tmp->next;
-    }
     return (i);
 }
 
@@ -75,17 +70,17 @@ static int      open_champ(t_board *bd, char **argv, int i, int op)
 
     if (ft_strlen(argv[i + op]) <= 4 || !ft_strcmp(argv[i + op]
         + ft_strlen(argv[i + op] - 4), ".cor"))
-        return (0);
+        return (ft_error(3, 0));
     if ((fd = open(argv[i + op], O_RDONLY)) == -1)
-        return (ft_error(3));
-    if (!(champ = collect_champion_data(bd, fd, champ)))
+        return (ft_error(3, 1));
+    if (!(collect_champion_data(bd, fd, &champ)))
         return (0);
     attribute_id(bd, champ, (int[2]){i, op}, argv);
     add_champ_to_lst(bd, champ);
     return (1);
 }
 
-static int      get_dump(t_board *bd, char **argv, int i)
+static int      dump(t_board *bd, char **argv, int i)
 {
     bd->dump = ft_atoi(argv[i + 1]);
     if (bd->dump < 0)
@@ -105,34 +100,42 @@ static int     get_verbose(t_board *bd, char *arg)
     return (1);
 }
 
-static int     check_arg(char **argv, int *i, t_board *bd)
+static int      check_arg_ii(t_board *bd, char **argv, int *i)
+{
+
+    return (0);
+}
+
+static int      check_arg(t_board *bd, char **argv, int *i)
 {
     static char *opt_list[3] = {"-n", "-d", "-v"};
     int         n;
 
     n = 4;
     if (argv[*i][0] == '-' && (n = pos_str_tab(argv[*i], opt_list)) == -1)
-        return (ft_error(2));
+        return (ft_error(2, 0));
     else if (n == 0)
-        if (!argv[*i + 1] || !argv[*i + 2] || !ft_onlydigit(argv[*i + 1]) ||
-                !open_champ(bd, argv, *i, 2))
-            return (ft_error(3));
-        else
-            i += 2;
+    {
+        if (!argv[*i + 1] || !argv[*i + 2] || !ft_isnumber(argv[*i + 1]))
+            return (ft_error(2, 0));
+        if (!open_champ(bd, argv, *i, 2))
+            return (0);
+        i += 2;
+    }
     else if (n == 1)
-        if (!argv[*i + 1] || !ft_onlydigit(argv[*i + 1]) ||
-                !get_dump(bd, argv, *i))
-            return (ft_error(4));
-        else
-            *i += 1;
+    {
+        if (!argv[*i + 1] || !ft_isnumber(argv[*i + 1]) || !dump(bd, argv, *i))
+            return (ft_error(2, 0));
+        *i += 1;
+    }
     else if (n == 2)
-        if (!argv[*i + 1] || !ft_onlydigit(argv[*i +1]) ||
+        if (!argv[*i + 1] || !ft_isnumber(argv[*i +1]) ||
                 !get_verbose(bd, argv[*i + 1]))
-            return (ft_error(5));
+            return (ft_error(2, 0));
         else
             *i += 1;
     else if (!open_champ(bd, argv, *i, 0))
-        return (ft_error(3));
+        return (0);
     return (1);
 }
 
@@ -143,7 +146,7 @@ t_board         *collect_inputs(char **argv, int argc, t_board *bd)
     i = 1;
     while (argv[i] && i < argc)
     {
-        if ((check_arg(argv, &i, bd) != 1))
+        if (!(check_arg(bd, argv, &i)))
             return (NULL);
         i++;
     }

@@ -29,7 +29,7 @@ int    insert_instructions(t_board *bd)
     while (i < bd->champions_count)
     {
         if (!insert_code(bd, (j * i++)))
-            return (ft_error(3)); 
+            return (ft_error(3, 1)); 
             j = MEM_SIZE / bd->champions_count;
     }    
     return (1);

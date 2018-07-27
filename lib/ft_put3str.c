@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adhondt <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 18:11:02 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/20 01:47:57 by adhondt          ###   ########.fr       */
+/*   Created: 2017/11/14 20:10:54 by adhondt           #+#    #+#             */
+/*   Updated: 2018/04/12 10:46:15 by adhondt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/corewar.h"
 
-unsigned char	*ft_memalloc_c(size_t size, char c)
+void	ft_put3str(char const *s, char *s2, char *s3)
 {
-	unsigned char	*str;
-	size_t	i;
-
-	i = 0;
-	if (!(str = (unsigned char *)malloc(sizeof(unsigned char) * (size + 1))))
-		return (NULL);
-	while (i != size)
-		str[i++] = c;
-	str[size] = '\0';
-	return (str);
+	ft_putstr(s);
+	ft_putstr(s2);
+	ft_putstr(s3);
+	return ;
 }

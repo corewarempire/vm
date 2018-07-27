@@ -152,15 +152,16 @@ int					get_long_indir(t_board *bd,
 						t_process *proc, unsigned int pos);
 int					get_reg(t_process *proc, unsigned int index);
 
-t_board				*init_board_data(t_board *bd, char **argv);
+int					init_board_data(t_board **bd, char **argv);
 t_board				*collect_inputs(char **argv, int argc, t_board *bd);
 void				init_f(void (*f[17])(t_board *b, int player));
-int					ft_error(int id);
+int					ft_error(int id, int errn);
 int					insert_instructions(t_board *board);
 void				print_memory(t_board *bd);
 void				print_champ_lst(t_board *bd);
 void    			ft_usage(void);
 
+void				ft_put3str(char const *s, char *s2, char *s3);
 void				ft_bzero(void *s, size_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
@@ -172,7 +173,7 @@ void				ft_putstr(char const *s);
 void				*ft_memalloc(size_t size);
 void				ft_putnbr(int n);
 int					ft_atoi_base(const char *str, int base);
-int					ft_onlydigit(char *str);
+int					ft_isnumber(char *str);
 int					ft_isdigit(int c);
 int					pos_str_tab(char *haystack, char **needle);
 int					get_next_line(const int fd, char **line);
