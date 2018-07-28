@@ -3,20 +3,22 @@
 void	st(t_board *bd, t_process *proc)
 {
 	unsigned int	pc;
-	int				ocp;
-	int				first_reg;
-	int				value;
+	unsigned int	octal;
+	unsigned int	reg;
+	unsigned int	offset;
+	int				val1;
 
-	pc = proc->pc + 1;
-	printf("st:\n");
-	ocp = ocp_scd(bd->ram[MEM_MOD(pc)]);
-	pc++;
-	first_reg = get_params(bd, proc, &pc, (int[3]){T_REG, 0, 0});
-	value = get_params(bd, proc, &pc, (int[3]){ocp, 0, 0});
-	proc->carry = (!first_reg) ? 1 : 0;
-	if (ocp == IND_CODE)
-		set_ramvalue(bd, proc->pc + (value % IDX_MOD), first_reg);
-	else if (ocp == REG_CODE)
-		proc->r[value - 1] = first_reg;
-	proc->pc += (ocp == IND_CODE) ? 5 : 4;
+	pc = proc->pc;
+	octal = ocp_scd(bd->ram[MEM_MOD(pc + 1)]);
+	reg = bd->ram[MEM_MOD(pc + 2)];
+	offset = octal == REG_CODE ? 4 : 5;
+	reg = proc->r[reg - 1];
+	if (octal == REG_CODE && (val1 = bd->ram[MEM_MOD(pc + 3)]))
+		proc->r[val1 - 1] = reg;
+	else
+	{
+		val1 = (short)get_dir(bd, pc + 3, 1);
+		set_ramvalue(bd, pc + (val1 % IDX_MOD), reg);
+	}
+	process->pc += offset;
 }

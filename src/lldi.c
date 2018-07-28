@@ -15,7 +15,7 @@ void	lldi(t_board *bd, t_process *proc)
 	proc->pc++;
 	val1 = get_params(bd, proc, &proc->pc, (int[3]){ocp[0], 1, 1});
 	val2 = get_params(bd, proc, &proc->pc, (int[3]){ocp[1], 1, 1});
-	if (!(proc->r[bd->ram[proc->pc]] = pc + ((val1 + val2) % IDX_MOD)))
+	if (!(proc->r[bd->ram[MEM_MOD(proc->pc)] - 1] = pc + ((val1 + val2) % IDX_MOD)))
 		proc->carry = 1;
 	else
 		proc->carry = 0;

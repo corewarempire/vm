@@ -40,7 +40,9 @@ int		check_instruction(t_board *bd, t_process *proc)
 	{
 		get_instruction(bd, proc);
 		if (proc->op_code)
+		{
 			exec_instruction(bd, proc);
+		}
 		else
 			proc->pc++;
 	}

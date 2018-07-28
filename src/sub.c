@@ -8,9 +8,11 @@ void	sub(t_board *bd, t_process *proc)
 	pc = proc->pc + 2;
 	printf("sub:\n");
 	res = 0;
-	res += proc->r[bd->ram[MEM_MOD(pc++)] - 1];
-	res -= proc->r[bd->ram[MEM_MOD(pc++)] - 1];
+	res += proc->r[bd->ram[MEM_MOD(pc)] - 1];
+	pc++;
+	res -= proc->r[bd->ram[MEM_MOD(pc)] - 1];
+	pc++;
 	proc->carry = (!res) ? 1 : 0;
-	proc->r[bd->ram[MEM_MOD(pc++)] - 1] = res;
-	proc->pc = pc;
+	proc->r[bd->ram[MEM_MOD(pc)] - 1] = res;
+	proc->pc = pc + 1;
 }
