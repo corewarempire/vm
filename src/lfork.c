@@ -14,4 +14,9 @@ void	lfork(t_board *bd, t_process *proc)
 	new->pc = newpc;
 	proc->pc = pc;
 	update_process_count(bd, proc->id_player, 1);
+	if (!bd->verbose[1])
+		return ;
+	ft_putstrnbrstr("Player ", new->id_player, " // Process ");
+	ft_putnbrstrnbr(proc->id_process, "\nFork, new PC on ", newpc);
+	ft_putstrnbrstr(". Carry : ", new->carry, "\n\n");
 }

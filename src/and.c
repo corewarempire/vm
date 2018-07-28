@@ -23,7 +23,7 @@ void		and(t_board *bd, t_process *proc)
 	if (!bd->verbose[1])
 		return ;
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
-	ft_putnbrstrnbr(proc->id_process, "\nAnd (", val1);
+	ft_putnbrstrnbr(proc->id_process, "\nAND (", val1);
 	ft_putstrnbrstr(" & ", val2, ") to r");
 	ft_putnbrstrnbr((int)ocp[2], " = ", (val1 & val2));
 	ft_putstrnbrstr(". Carry : ", proc->carry, "\n\n");

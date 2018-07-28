@@ -19,4 +19,11 @@ void	or(t_board *bd, t_process *proc)
 	else
 		proc->carry = 0;
 	proc->pc = pc + 1;
+	if (!bd->verbose[1])
+		return ;
+	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
+	ft_putnbrstrnbr(proc->id_process, "\nOR (", val1);
+	ft_putstrnbrstr(" | ", val2, ") to r");
+	ft_putnbrstrnbr(bd->ram[MEM_MOD(pc)], " = ", (val1 | val2));
+	ft_putstrnbrstr(". Carry : ", proc->carry, "\n\n");
 }

@@ -6,7 +6,7 @@ void	live(t_board *bd, t_process *proc)
 	int				val;
 
 	proc->pc++;
-	printf("live:\n");
+	// printf("live:\n");
 	val = get_params(bd, proc, &proc->pc, (int[3]){T_DIR, 0, 0});
 	proc->last_live = bd->cycle;
 	bd->total_cycle_live++;
