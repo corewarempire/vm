@@ -8,6 +8,7 @@ void	sti(t_board *bd, t_process *proc)
 	int				val0;
 
 	pc = proc->pc + 1;
+	printf("sti\n");
 	ocp[0] = REG_CODE;
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(pc)]);
 	ocp[2] = ocp_third(bd->ram[MEM_MOD(pc++)]);

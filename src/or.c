@@ -7,8 +7,8 @@ void	or(t_board *bd, t_process *proc)
 	int				val1;
 	int				val2;
 
-	pc = proc->pc;
-	pc++;
+	pc = proc->pc + 1;
+	printf("or:\n");
 	ocp[0] = ocp_first(bd->ram[MEM_MOD(pc)]);
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(pc)]);
 	pc++;

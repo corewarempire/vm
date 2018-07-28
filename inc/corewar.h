@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/26 18:35:21 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 15:42:26 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,6 @@ char				*ft_itoa_base(int value, int base, int upper);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_f(char const *s1, char const *s2, int j);
 char				*get_name_champ(t_board *bd, int id);
+void				memclear(t_board *bd);
 
 #endif

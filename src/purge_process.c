@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 17:22:21 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/26 18:04:54 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 15:37:58 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ void	purge_process(t_board *bd)
 
 	proc = bd->lst_process->process;
 	last = 0;
+	// printf("=========================\n");
+	// printf("PURGE:\n");
+	// printf("Cycle to die %d\n", bd->cycle_to_die);
 	while (proc)
 	{
+		// printf("Last live:%d | Last purge:%d\n", proc->last_live, bd->last_check_purge);
 		if (proc->last_live <= bd->last_check_purge)
 		{
+			// printf("SHOULD CLEAN %d\n", bd->cycle);
 			update_process_count(bd, proc->id_player, -1);
 			pkill(bd, &last, &proc);
 		}
@@ -56,4 +61,5 @@ void	purge_process(t_board *bd)
 			proc = proc->next;
 		}
 	}
+	// printf("=========================\n");
 }

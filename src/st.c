@@ -8,6 +8,7 @@ void	st(t_board *bd, t_process *proc)
 	int				value;
 
 	pc = proc->pc + 1;
+	printf("st:\n");
 	ocp = ocp_scd(bd->ram[MEM_MOD(pc)]);
 	pc++;
 	first_reg = get_params(bd, proc, &pc, (int[3]){T_REG, 0, 0});
@@ -17,5 +18,5 @@ void	st(t_board *bd, t_process *proc)
 		set_ramvalue(bd, proc->pc + (value % IDX_MOD), first_reg);
 	else if (ocp == REG_CODE)
 		proc->r[value - 1] = first_reg;
-	proc->pc = (ocp == IND_CODE) ? 5 : 4;
+	proc->pc += (ocp == IND_CODE) ? 5 : 4;
 }

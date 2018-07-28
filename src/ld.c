@@ -6,8 +6,8 @@ void	ld(t_board *bd, t_process *proc)
 	int				val1;
 	unsigned char	ocp;
 
-	pc = proc->pc;
-	pc++;
+	pc = proc->pc + 1;
+	printf("ld:\n");
 	ocp = ocp_first(bd->ram[MEM_MOD(pc)]);
 	pc++;
 	if (!(val1 = get_params(bd, proc, &pc, (int[3]){ocp, 0, 0})))

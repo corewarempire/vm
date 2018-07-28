@@ -6,8 +6,8 @@ void	frk(t_board *bd, t_process *proc)
 	unsigned int	pc;
 	int				newpc;
 
-	pc = proc->pc;
-	pc++;
+	pc = proc->pc + 1;
+	printf("fork\n");
 	newpc = get_params(bd, proc, &pc, (int[3]){DIR_CODE, 1, 0});
 	if (!(new = add_process(bd->lst_process, bd->id_process++, proc->id_player, (newpc))))
 		printf("FAILED TO CREATE FORK NEED TO EXIT\n");

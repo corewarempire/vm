@@ -5,7 +5,9 @@ void	get_instruction(t_board *bd, t_process *proc)
 	unsigned char	c;
 
 	if (proc->op_code)
+	{
 		return ;
+	}
 	c = bd->ram[MEM_MOD(proc->pc)];
 	if (c > 0 && c < 17)
 	{
@@ -19,7 +21,7 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	static void	(*f[])() = {NULL, live, ld, st, add, sub, and,
 							or, xor, zjmp, ldi, sti, frk, lld,
 							lldi, lfork, aff};
-	
+
 	if (proc->exec_cycle == 1)
 	{
 		f[proc->op_code](bd, proc);
@@ -34,10 +36,13 @@ int		exec_instruction(t_board *bd, t_process *proc)
 
 int		check_instruction(t_board *bd, t_process *proc)
 {
-	get_instruction(bd, proc);
-	if (proc->op_code)
-		exec_instruction(bd, proc);
-	else
-		proc->pc = MEM_MOD(proc->pc + 1);
+	if (proc)
+	{
+		get_instruction(bd, proc);
+		if (proc->op_code)
+			exec_instruction(bd, proc);
+		else
+			proc->pc++;
+	}
 	return (1);
 }

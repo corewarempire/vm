@@ -4,7 +4,6 @@ int		check_process_status(t_board *bd)
 {
 	if (bd->verbose[2])
 		print_verbose_data(bd);
-	bd->check_nbr++;
 	purge_process(bd);
 	bd->last_check_purge = bd->cycle;
 	if (bd->total_cycle_live >= NBR_LIVE || bd->check_nbr == MAX_CHECKS)
@@ -12,6 +11,7 @@ int		check_process_status(t_board *bd)
 		bd->cycle_to_die -= CYCLE_DELTA;
 		bd->check_nbr = 0;
 	}
+	bd->check_nbr++;
 	bd->total_cycle_live = 0;
 	if (bd->verbose[3])
 			print_memory(bd, 1);
@@ -36,6 +36,8 @@ void	run(t_board *bd)
 				!check_process_status(bd)) || (bd->cycle_to_die <= 0))
 			break ;
 		bd->cycle++;
+		if (bd->cycle > 20000)
+			exit(1);
 		proc = bd->lst_process->process;
 	}
 }

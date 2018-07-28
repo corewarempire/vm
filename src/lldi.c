@@ -9,6 +9,7 @@ void	lldi(t_board *bd, t_process *proc)
 
 	pc = proc->pc;
 	proc->pc++;
+	printf("lldi\n");
 	ocp[0] = ocp_first(bd->ram[proc->pc]);
 	ocp[1] = ocp_scd(bd->ram[proc->pc]);
 	proc->pc++;

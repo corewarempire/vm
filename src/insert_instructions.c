@@ -3,15 +3,15 @@
 int       insert_code(t_board *bd, int pos)
 {
     t_champ         *tmp;
-    unsigned char   *str;
+    unsigned char   str;
 
     tmp = bd->first_champ;
     while (tmp->next && tmp->next->fd != 0)
         tmp = tmp->next;        
     lseek(tmp->fd, 2192, SEEK_SET); //protegerer lseek?
-    while ((read(tmp->fd, str, 1) > 0))
+    while ((read(tmp->fd, &str, 1) > 0))
     {
-        bd->ram[pos] = (unsigned char)str[0];
+        bd->ram[pos] = (unsigned char)str;
         pos++;
     }
     close(tmp->fd);
