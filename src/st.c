@@ -17,8 +17,8 @@ void	st(t_board *bd, t_process *proc)
 		proc->r[val1 - 1] = reg;
 	else
 	{
-		val1 = (short)get_dir(bd, pc + 3, 1);
+		val1 = (short)get_dir4(bd, pc + 3);
 		set_ramvalue(bd, pc + (val1 % IDX_MOD), reg);
 	}
-	process->pc += offset;
+	proc->pc += offset;
 }
