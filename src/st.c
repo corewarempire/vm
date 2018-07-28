@@ -11,8 +11,9 @@ void	verbosity(int ocp, t_process *proc, int value, int first_reg)
 void	st(t_board *bd, t_process *proc)
 {
 	unsigned int	pc;
-	int				ocp;
-	int				first_reg;
+	unsigned int	ocp;
+	unsigned int	first_reg;
+	unsigned int	offset;
 	int				value;
 
 	pc = proc->pc + 1;

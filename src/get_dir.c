@@ -1,7 +1,5 @@
 #include "corewar.h"
 
-// cf => https://fr.wikipedia.org/wiki/Endianness#Big_endian
-
 int		get_dir4(t_board *bd, unsigned int pos)
 {
 	int ret;

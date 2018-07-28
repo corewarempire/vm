@@ -15,7 +15,7 @@ void	lld(t_board *bd, t_process *proc)
 	else
 		proc->carry = 0;
 	proc->r[bd->ram[MEM_MOD(pc)] - 1] = val1;
-	proc->pc = pc + 1;
+	proc->pc = MEM_MOD(pc + 1);
 	if (!bd->verbose[1])
 		return ;
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
