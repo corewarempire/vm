@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/28 15:42:26 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 00:31:14 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_f(char const *s1, char const *s2, int j);
 char				*get_name_champ(t_board *bd, int id);
 void				memclear(t_board *bd);
+void				get_ocp(t_board *bd, unsigned int pos, int *ocp);
+int					calc_offset(int ocp[3], int flag);
 
 #endif
