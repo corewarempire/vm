@@ -16,7 +16,6 @@ void	add(t_board *bd, t_process *proc)
 	int				v2;
 
 	proc->pc += 2;
-	printf("add:\n");
 	v1 = proc->r[bd->ram[MEM_MOD(proc->pc)] - 1];
 	proc->pc++;
 	v2 = proc->r[bd->ram[MEM_MOD(proc->pc)] - 1];

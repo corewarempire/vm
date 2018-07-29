@@ -19,9 +19,11 @@ void	ld(t_board *bd, t_process *proc)
 	int	value;
 
 	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc + 1)]);
-	value = (ocp == IND_CODE) ? get_indir(bd, proc->pc + 2): get_dir4(bd, proc->pc + 2);
+	value = (ocp == IND_CODE) ? get_dir4(bd, proc->pc + (get_indir(bd, proc->pc
+	+ 2) % IDX_MOD)) : get_dir4(bd, proc->pc + 2);
 	proc->carry = (!value) ? 1 : 0;
-	reg = (ocp == IND_CODE) ? bd->ram[MEM_MOD(proc->pc + 4)] : bd->ram[MEM_MOD(proc->pc + 6)];
+	reg = (ocp == IND_CODE) ? bd->ram[MEM_MOD(proc->pc + 4)]
+	: bd->ram[MEM_MOD(proc->pc + 6)];
 	proc->r[reg - 1] = value;
 	proc->pc += (ocp == IND_CODE) ? 5 : 7;
 	if (bd->verbose[1])
