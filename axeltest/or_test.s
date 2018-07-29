@@ -1,11 +1,13 @@
-.name "stayin' alive"
-.comment "Ha, Ha, Ha, stayiiiiin' aliiiiiiiiiive"
-	
-#sti	r1, %:live, %1			;change live by the right value
-ld %5, r4
-ld %6, r5
-or r4, r5, r6
-or r6, r5, r5
-#live:
-#live %1
-#zjmp %:live
+.name "lld"
+.comment "lol"
+
+ld %15, r9
+or r3, r3, r2
+or r3, r3, r4
+or r5, r5, r6
+or	%10, %15, r7
+or	%10, %10, r7
+or	%10, r9, r7
+or	%10, 10, r7
+or	-10, %10, r7
+or	-10, r7, r7

@@ -1,29 +1,64 @@
 #include "corewar.h"
 
+static void	verbosity(t_board *bd, t_process *proc, int val[3])
+{
+	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
+	ft_putnbrstrnbr(proc->id_process, "\nOR (", val[0]);
+	ft_putstrnbrstr(" | ", val[1], ") to r");
+	ft_putnbrstrnbr(val[2] - 1, " = ", (val[0] ^ val[1]));
+	ft_putstrnbrstr(". Carry : ", proc->carry, "\n");
+}
+
+static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
+{
+	int res;
+
+	if (ocp == REG_CODE)
+	{
+		res = bd->ram[MEM_MOD(*pc)];
+		(*pc) += 1;
+	}
+	else if (ocp == DIR_CODE)
+	{
+		res = (flag) ? get_dir4(bd, *pc) : get_dir2(bd, *pc);
+		(*pc) += (flag) ? 4 : 2;
+	}
+	else if (ocp == IND_CODE)
+	{
+		res = (flag) ? get_indir(bd, *pc) : get_dir2(bd, *pc);
+		(*pc) += 2;
+	}
+	return (res);
+}
+
 void	xor(t_board *bd, t_process *proc)
 {
-	unsigned int	pc;
-	unsigned char	ocp[2];
-	int				val1;
-	int				val2;
+	int		ocp[3];
+	int		val[3];
+	int		offset;
+	int		i;
 
-	pc = proc->pc + 1;
-	printf("xor:\n");
-	ocp[0] = ocp_first(bd->ram[MEM_MOD(pc)]);
-	ocp[1] = ocp_scd(bd->ram[MEM_MOD(pc)]);
-	pc++;
-	val1 = get_params(bd, proc, &pc, (int[3]){ocp[0], 0, 0});
-	val2 = get_params(bd, proc, &pc, (int[3]){ocp[1], 0, 0});
-	if ((proc->r[bd->ram[MEM_MOD(pc)] - 1] = val1 ^ val2) == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
-	proc->pc = pc + 1;
-	if (!bd->verbose[1])
-		return ;
-	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
-	ft_putnbrstrnbr(proc->id_process, "\nXOR (", val1);
-	ft_putstrnbrstr(" ^ ", val2, ") to r");
-	ft_putnbrstrnbr(bd->ram[MEM_MOD(pc)], " = ", (val1 ^ val2));
-	ft_putstrnbrstr(". Carry : ", proc->carry, "\n\n");
+	offset = proc->pc + 1;
+	ocp[0] = ocp_first(bd->ram[MEM_MOD(offset)]);
+	ocp[1] = ocp_scd(bd->ram[MEM_MOD(offset)]);
+	ocp[2] = REG_CODE;
+	offset++;
+	i = 0;
+	while (i < 3)
+	{
+		val[i] = get_value(bd, &offset, ocp[i], 1);
+		i++;
+	}
+	if (ocp[0] == REG_CODE)
+		val[0] = proc->r[val[0] - 1];
+	if (ocp[1] == REG_CODE)
+		val[1] = proc->r[val[1] - 1];
+	if (ocp[0] == IND_CODE)
+		val[0] = get_dir4(bd, proc->pc + val[0] % IDX_MOD);
+	if (ocp[1] == IND_CODE)
+		val[1] = get_dir4(bd, proc->pc + val[1] % IDX_MOD);
+	proc->carry = (!(proc->r[val[2] - 1] = val[0] ^ val[1])) ? 1 : 0;
+	if (bd->verbose[1])
+		verbosity(bd, proc, val);
+	proc->pc = offset;
 }
