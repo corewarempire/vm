@@ -49,9 +49,10 @@ void			ldi(t_board *bd, t_process *proc)
 	get_ocp(bd, proc->pc + 1, ocp);
 	(ocp[0] == REG_CODE) ? ldi_reg_case(bd, proc, val, ocp)
 		: ldi_other_case(bd, proc, val, ocp);
-	offset = calc_offset(ocp, 0);
+	offset = calc_offset(ocp, 1);
+	printf("Offset return %d\n", offset);
 	if (bd->ram[MEM_MOD(val[2])] < 1 || bd->ram[MEM_MOD(val[2])] > 15)
-		return ;
+	{
 	if (!(proc->r[bd->ram[MEM_MOD(val[2])] - 1]
 			= ((proc->pc + ((val[0] + val[1]) % IDX_MOD)))))
 		proc->carry = 1;
@@ -59,5 +60,6 @@ void			ldi(t_board *bd, t_process *proc)
 		proc->carry = 0;
 	if (bd->verbose[1])
 		verbosity(bd, proc, ocp, val);
-	proc->pc += 5;
+	}
+	proc->pc += offset;
 }

@@ -21,11 +21,20 @@ int			calc_offset(int ocp[3], int flag)
 	while (i < 3)
 	{
 		if (ocp[i] == REG_CODE)
+		{
+			printf("Offset calc Reg\n");
 			offset += 1;
+		}
 		else if (ocp[i] == IND_CODE)
+		{
+			printf("Offset calc ind\n");
 			offset += 2;
+		}
 		else if (ocp[i] == DIR_CODE)
+		{
+			printf("Offset calc dir\n");
 			offset += (flag) ? 4 : 2;
+		}
 		i++;
 	}
 	return (offset);
