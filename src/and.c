@@ -3,9 +3,9 @@
 static void	verbosity(t_board *bd, t_process *proc, int val[3])
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
-	ft_putnbrstrnbr(proc->id_process, "\nOR (", val[0]);
-	ft_putstrnbrstr(" | ", val[1], ") to r");
-	ft_putnbrstrnbr(val[2] - 1, " = ", (val[0] & val[1]));
+	ft_putnbrstrnbr(proc->id_process, "\nAND (", val[0]);
+	ft_putstrnbrstr(" & ", val[1], ") to r");
+	ft_putnbrstrnbr(val[2], " = ", (val[0] & val[1]));
 	ft_putstrnbrstr(". Carry : ", proc->carry, "\n");
 }
 
@@ -54,9 +54,9 @@ void	and(t_board *bd, t_process *proc)
 	if (ocp[1] == REG_CODE)
 		val[1] = proc->r[val[1] - 1];
 	if (ocp[0] == IND_CODE)
-		val[0] = get_dir4(bd, proc->pc + val[0] % IDX_MOD);
+		val[0] = get_dir4(bd, proc->pc + (val[0] % IDX_MOD));
 	if (ocp[1] == IND_CODE)
-		val[1] = get_dir4(bd, proc->pc + val[1] % IDX_MOD);
+		val[1] = get_dir4(bd, proc->pc + (val[1] % IDX_MOD));
 	proc->carry = (!(proc->r[val[2] - 1] = val[0] & val[1])) ? 1 : 0;
 	if (bd->verbose[1])
 		verbosity(bd, proc, val);

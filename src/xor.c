@@ -3,10 +3,10 @@
 static void	verbosity(t_board *bd, t_process *proc, int val[3])
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
-	ft_putnbrstrnbr(proc->id_process, "\nOR (", val[0]);
-	ft_putstrnbrstr(" | ", val[1], ") to r");
+	ft_putnbrstrnbr(proc->id_process, "\nXOR (", val[0]);
+	ft_putstrnbrstr(" ^ ", val[1], ") to r");
 	ft_putnbrstrnbr(val[2] - 1, " = ", (val[0] ^ val[1]));
-	ft_putstrnbrstr(". Carry : ", proc->carry, "\n");
+	ft_putstrnbrstr(". Carry : ", proc->carry, "\n\n");
 }
 
 static	int		get_value(t_board *bd, int *pc, int ocp, int flag)

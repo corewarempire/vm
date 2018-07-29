@@ -8,7 +8,7 @@ static void	verbosity(t_process *proc, int val)
 	ft_putnbr(proc->id_process);
 	ft_putstr("\nLive ");
 	ft_putnbr(val);
-	ft_putstr("\n");
+	ft_putstr("\n\n");
 }
 
 static int	is_true_player(t_board *bd, int val)
