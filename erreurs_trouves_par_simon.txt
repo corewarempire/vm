@@ -1,0 +1,12 @@
+
+xor.c : printf, pas de header
+and.c : printf, pas de header
+or.c  : printf, pas de header
+sub.c : printf, pas de header
+add.c : printf, pas de header
+st.c  : printf, pas de header
+	  : verbosity -> syntaxe bizzare
+sti.c : pas de header
+lld.c : commentaires, pas de header
+lldi.c: pas de header
+live.c: commentaires, pas de header
