@@ -22,6 +22,7 @@ void	st(t_board *bd, t_process *proc)
 		proc->r[value - 1] = value_reg;
 	else
 		set_ramvalue(bd, proc->pc + (value % IDX_MOD), value_reg);
+	proc->carry = (!(value_reg)) ? 1 : 0;
 	if (bd->verbose[1])
 		verbosity(bd, proc, (int [3]){value, value_reg, ocp});
 	proc->pc += (ocp == IND_CODE) ? 5 : 4;
