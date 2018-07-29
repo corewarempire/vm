@@ -2,7 +2,11 @@ Map-Champs:
  ☐ Code des champions n'est pas au bonne endroit. Le premier apparait en bas
 
 Fonctions debuge:
-  ✔ lfork @done (18-07-24 17:15)
-  ☐ fork
-  ☐ ld
-  ☐ lld
+ ✔ ldi @done (18-07-29 18:17)
+ ✔ lldi @done (18-07-29 18:17)
+ ✔ sti @done (18-07-29 18:20)
+ ✔ st @done (18-07-29 18:58)
+ ✔ lld @done (18-07-29 19:00)
+ ✔ ldi @done (18-07-29 19:00)
+ ✔ ld @done (18-07-29 19:00)
+ 
