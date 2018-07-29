@@ -12,12 +12,14 @@
 
 #include "corewar.h"
 
-// {"ldi", 3, {	
-// 		T_REG | T_DIR | T_IND, 
-// 		T_DIR | T_REG, 
-// 		T_REG
-// 	}, 10, 25,
-// 		"load index", 1, 1},
+static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
+{
+	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
+	ft_putnbrstrnbr(proc->id_process, "\nLdi (", val[0]);
+	ft_putstrnbrstr(" + ", val[1], ") -> r");
+	ft_putnbr(val[2]);
+	ft_putstr(".\n\n");
+}
 
 static void		ldi_reg_case(t_board *bd, t_process *proc, int *val, int *ocp)
 {
@@ -49,11 +51,11 @@ void			ldi(t_board *bd, t_process *proc)
 		: ldi_other_case(bd, proc, val, ocp);
 	offset = calc_offset(ocp, 0);
 	if (!(proc->r[bd->ram[MEM_MOD(val[2])] - 1]
-			= ((proc->pc + val[0] + val[1] % IDX_MOD))))
+			= ((proc->pc + ((val[0] + val[1]) % IDX_MOD)))))
 		proc->carry = 1;
 	else
 		proc->carry = 0;
-	proc->pc += offset + 1;
-	if (!bd->verbose[1])
-		return ;
+	// if (bd->verbose[1])
+		// verbosity(bd, proc, ocp, val);
+	// proc->pc += offset + 1;
 }
