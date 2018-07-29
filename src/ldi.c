@@ -70,8 +70,7 @@ void			ldi(t_board *bd, t_process *proc)
 		val[1] = proc->r[val[1] - 1];
 	if (ocp[0] == IND_CODE)
 	{
-		val[0] = get_dir4(bd, val[0] + proc->pc);
-		val[0] = get_dir2(bd, val[0] + proc->pc);
+		val[0] = get_dir4(bd, (val[0] % IDX_MOD) + proc->pc);
 		printf("%d |\n", val[0]);
 	}
 	proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
