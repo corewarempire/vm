@@ -1,7 +1,5 @@
 #include "corewar.h"
 
-// {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
-
 static void	verbosity(t_board *bd, t_process *proc, int value, int reg)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
@@ -23,8 +21,8 @@ void	ld(t_board *bd, t_process *proc)
 	+ 2) % IDX_MOD)) : get_dir4(bd, proc->pc + 2);
 	proc->carry = (!value) ? 1 : 0;
 	reg = (ocp == IND_CODE) ? bd->ram[MEM_MOD(proc->pc + 4)]
-	: bd->ram[MEM_MOD(proc->pc + 6)];
-	proc->r[reg - 1] = value;
+		: bd->ram[MEM_MOD(proc->pc + 6)];
+	proc->carry = (!(proc->r[reg - 1] = value)) ? 1 : 0;
 	proc->pc += (ocp == IND_CODE) ? 5 : 7;
 	if (bd->verbose[1])
 		verbosity(bd, proc, value, reg);

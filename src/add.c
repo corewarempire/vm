@@ -23,7 +23,7 @@ void	add(t_board *bd, t_process *proc)
 	proc->pc++;
 	v2 = proc->r[bd->ram[MEM_MOD(proc->pc)] - 1];
 	proc->pc++;
-	proc->carry = (!v2) ? 1 : 0;
+	proc->carry = (!(v2 + v1)) ? 1 : 0;
 	if (bd->ram[MEM_MOD(proc->pc)])
 		proc->r[bd->ram[MEM_MOD(proc->pc)] - 1] = v1 + v2;
 	proc->pc++;

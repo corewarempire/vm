@@ -57,6 +57,7 @@ void			ldi(t_board *bd, t_process *proc)
 	if (ocp[0] == IND_CODE)
 		val[0] = get_dir4(bd, (val[0] % IDX_MOD) + proc->pc);
 	proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
+	proc->carry = (!proc->r[val[2] - 1]) ? 1 : 0;
 	if (bd->verbose[1])
 		verbosity(bd, proc, ocp, val);
 	proc->pc = offset;
