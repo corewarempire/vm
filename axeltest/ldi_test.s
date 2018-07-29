@@ -4,11 +4,18 @@
 #sti	r1, %:live, %1			;change live by the right value
 #ld %200, r6
 ld %1, r5
-ldi r6, %15, r3
-ldi r6, %17000, r3
+ldi r6, %15, r5
+ldi r6, %17000, r6
 ldi r6, r4, r3
 ldi r6, r5, r4
 ldi r6, r4, r4
+and r1, r1, r1
+and r1, r1, r1
+and r1, r1, r1
+and r1, r1, r1
+and r1, r1, r1
+and r1, r1, r1
+and r1, r1, r1
 ldi r6, %5, r3
 ldi %5, %10, r4
 ldi %5, %10, r2
