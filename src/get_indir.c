@@ -27,6 +27,7 @@ int		get_long_indir(t_board *bd, t_process *proc, unsigned int pos)
 	addr = 0;
 	ret = 0;
 	addr = (bd->ram[MEM_MOD(pos)] << 8) | bd->ram[MEM_MOD(pos + 1)];
+	return (addr);
 	ret = (bd->ram[MEM_MOD(proc->pc + addr)] << 24)
 			| (bd->ram[MEM_MOD(proc->pc + 1 + addr)] << 16)
 			| (bd->ram[MEM_MOD(proc->pc + 2 + addr)] << 8)
