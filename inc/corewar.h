@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/29 00:31:14 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 14:36:03 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,8 @@ unsigned int		ocp_scd(unsigned char c);
 unsigned int		ocp_third(unsigned char c);
 short				get_dir2(t_board *bd, unsigned int pos);
 int					get_dir4(t_board *bd, unsigned int pos);
-int					get_indir(t_board *bd,
-						t_process *proc, unsigned int pos);
-int					get_long_indir(t_board *bd,
-						t_process *proc, unsigned int pos);
+int					get_indir(t_board *bd, unsigned int pos);
+int					get_long_indir(t_board *bd, unsigned int pos);
 int					get_reg(t_process *proc, unsigned int index);
 
 int					init_board_data(t_board **bd, char **argv);
@@ -203,7 +201,5 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_f(char const *s1, char const *s2, int j);
 char				*get_name_champ(t_board *bd, int id);
 void				memclear(t_board *bd);
-void				get_ocp(t_board *bd, unsigned int pos, int *ocp);
-int					calc_offset(int ocp[3], int flag);
 
 #endif

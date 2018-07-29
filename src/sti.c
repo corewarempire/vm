@@ -28,11 +28,11 @@ void	sti(t_board *bd, t_process *proc)
 	}
 	else
 	{
-		val[1] = (ocp[0] == IND_CODE) ? get_indir(bd, proc, proc->pc + 3) : get_dir2(bd, proc->pc + 3);
+		val[1] = (ocp[0] == IND_CODE) ? get_indir(bd, proc->pc + 3) : get_dir2(bd, proc->pc + 3);
 		if (ocp[0] == IND_CODE)
 			val[1] = get_dir4(bd, proc->pc + val[1]);
 		val[2] = (ocp[1] == DIR_CODE) ? get_dir2(bd, proc->pc + 5) : proc->r[bd->ram[proc->pc + 5] - 1];
-		offset = (ocp[1] == DIR_CODE) ? 7 : 6;
+	offset = (ocp[1] == DIR_CODE) ? 7 : 6;
 	}
 	if (bd->verbose[1])
 		verbosity(bd, proc, ocp, val);

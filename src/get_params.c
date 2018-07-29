@@ -17,7 +17,7 @@ int			get_params(t_board *bd, t_process *proc, unsigned int *pc, int data[3])
 	}
 	else
 	{
-		res = (!data[2]) ? get_indir(bd, proc, *pc) : get_long_indir(bd, proc, *pc);
+		res = (!data[2]) ? get_indir(bd, *pc) : get_long_indir(bd, *pc);
 		(*pc) += 2;
 	}
 	return (res);

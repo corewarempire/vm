@@ -20,7 +20,7 @@ void	st(t_board *bd, t_process *proc)
 	printf("st:\n");
 	ocp = ocp_scd(bd->ram[MEM_MOD(pc + 1)]);
 	value_reg = proc->r[bd->ram[MEM_MOD(pc + 2)] - 1];
-	value = (ocp == REG_CODE) ? bd->ram[MEM_MOD(pc + 3)] : get_indir(bd, proc, pc + 3);
+	value = (ocp == REG_CODE) ? bd->ram[MEM_MOD(pc + 3)] : get_indir(bd, pc + 3);
 	if (ocp == REG_CODE)
 		proc->r[value - 1] = value_reg;
 	else
