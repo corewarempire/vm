@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 00:18:56 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/29 00:31:20 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 03:09:11 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ void			ldi(t_board *bd, t_process *proc)
 	(ocp[0] == REG_CODE) ? ldi_reg_case(bd, proc, val, ocp)
 		: ldi_other_case(bd, proc, val, ocp);
 	offset = calc_offset(ocp, 0);
+	if (bd->ram[MEM_MOD(val[2])] < 1 || bd->ram[MEM_MOD(val[2])] > 15)
+		return ;
 	if (!(proc->r[bd->ram[MEM_MOD(val[2])] - 1]
 			= ((proc->pc + ((val[0] + val[1]) % IDX_MOD)))))
 		proc->carry = 1;
 	else
 		proc->carry = 0;
-	// if (bd->verbose[1])
-		// verbosity(bd, proc, ocp, val);
-	// proc->pc += offset + 1;
+	if (bd->verbose[1])
+		verbosity(bd, proc, ocp, val);
+	proc->pc += 5;
 }
