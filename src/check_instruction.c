@@ -4,7 +4,7 @@ void	get_instruction(t_board *bd, t_process *proc)
 {
 	unsigned char	c;
 
-	if (proc->op_code)
+	if (!proc || proc->op_code)
 	{
 		return ;
 	}
@@ -26,11 +26,11 @@ int		exec_instruction(t_board *bd, t_process *proc)
 	{
 		f[proc->op_code](bd, proc);
 		proc->op_code = 0;
-			proc->exec_cycle = 0;
+		proc->exec_cycle = 0;
 		get_instruction(bd, proc);
 	}
 	else
-		(proc->exec_cycle)--;
+		proc->exec_cycle--;
 	return (1);
 }
 
@@ -44,7 +44,9 @@ int		check_instruction(t_board *bd, t_process *proc)
 			exec_instruction(bd, proc);
 		}
 		else
+		{
 			proc->pc++;
+		}
 	}
 	return (1);
 }
