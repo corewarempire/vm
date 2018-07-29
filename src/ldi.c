@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ldi.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/29 00:18:56 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/29 14:45:29 by akarasso         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "corewar.h"
 
 static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
@@ -18,7 +6,7 @@ static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 	ft_putnbrstrnbr(proc->id_process, "\nLdi (", val[0]);
 	ft_putstrnbrstr(" + ", val[1], ") -> ");
 	ft_putnbr(val[0] + val[1]);
-	ft_putstrnbrstr(" (with pc and mod ", ((val[0] + val[1]) % IDX_MOD) + proc->pc, ")");
+	ft_putstrnbrstr(" (with pc and mod ", ((proc->pc + val[0] + val[1]) % IDX_MOD), ")");
 	ft_putstr(".\n\n");
 }
 
@@ -70,9 +58,7 @@ void			ldi(t_board *bd, t_process *proc)
 		val[1] = proc->r[val[1] - 1];
 	if (ocp[0] == IND_CODE)
 	{
-		val[0] = get_dir4(bd, val[0] + proc->pc);
-		val[0] = get_dir2(bd, val[0] + proc->pc);
-		printf("%d |\n", val[0]);
+		val[0] = get_dir4(bd, (val[0] + proc->pc) % IDX_MOD);
 	}
 	proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
 	if (bd->verbose[1])
