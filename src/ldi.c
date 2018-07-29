@@ -6,7 +6,7 @@ static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 	ft_putnbrstrnbr(proc->id_process, "\nLdi (", val[0]);
 	ft_putstrnbrstr(" + ", val[1], ") -> ");
 	ft_putnbr(val[0] + val[1]);
-	ft_putstrnbrstr(" (with pc and mod ", ((proc->pc + val[0] + val[1]) % IDX_MOD), ")");
+	ft_putstrnbrstr(" (with pc and mod ", proc->pc + ((val[0] + val[1]) % IDX_MOD), ")");
 	ft_putstr(".\n\n");
 }
 
@@ -51,16 +51,11 @@ void			ldi(t_board *bd, t_process *proc)
 		i++;
 	}
 	if (ocp[0] == REG_CODE)
-	{
 		val[0] = proc->r[val[0] - 1];
-	}
 	if (ocp[1] == REG_CODE)
 		val[1] = proc->r[val[1] - 1];
 	if (ocp[0] == IND_CODE)
-	{
 		val[0] = get_dir4(bd, (val[0] % IDX_MOD) + proc->pc);
-		printf("%d |\n", val[0]);
-	}
 	proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
 	if (bd->verbose[1])
 		verbosity(bd, proc, ocp, val);
