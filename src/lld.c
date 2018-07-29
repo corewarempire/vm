@@ -1,8 +1,5 @@
 #include "corewar.h"
 
-
-//{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
-
 static void	verbosity(t_board *bd, t_process *proc, int ocp, int val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
@@ -17,7 +14,7 @@ static void	verbosity(t_board *bd, t_process *proc, int ocp, int val)
 		ft_putstrnbrstr(" in r", bd->ram[MEM_MOD(proc->pc + 4)], ". Carry : ");
 	}
 	ft_putnbr(proc->carry);
-	ft_putstr("\n\n");
+	ft_putstr("\n");
 }
 
 void	lld(t_board *bd, t_process *proc)

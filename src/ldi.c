@@ -7,7 +7,7 @@ static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 	ft_putstrnbrstr(" + ", val[1], ") -> ");
 	ft_putnbr(val[0] + val[1]);
 	ft_putstrnbrstr(" (with pc and mod ", proc->pc + ((val[0] + val[1]) % IDX_MOD), ")");
-	ft_putstr(".\n\n");
+	ft_putstr(".\n");
 }
 
 static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
