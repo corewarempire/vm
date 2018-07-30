@@ -116,8 +116,7 @@ static const t_op	g_op_tab[17] =
 };
 
 t_lst_process		*init_list_process(void);
-t_process			*add_process(t_lst_process *lst,
-						unsigned int id_process, int r1, unsigned int pc);
+t_process			*add_process(t_board *bd, int r1, unsigned int pc);
 void				update_process_count(t_board *bd, int id, int op);
 void				set_ramvalue(t_board *bd,
 						unsigned int pc, unsigned int value);
@@ -184,24 +183,18 @@ int					ft_atoi_base(const char *str, int base);
 int					ft_isnumber(char *str);
 int					ft_isdigit(int c);
 int					pos_str_tab(char *haystack, char **needle);
-int					get_next_line(const int fd, char **line);
 int					ft_atoi(const char *str);
 int					pos_in_str(char c, char *str);
 int					ft_strcmp(const char *tab, const char *tab2);
 int					ft_strlen(const char *src);
 unsigned char		*ft_memalloc_c(size_t size, char c);
-char				*ft_retcmd(char *str);
 char				*ft_strncpy(char *dest, const char *src, size_t n);
-char				*ft_itoa_hex_byte(int value, int upper);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strcat(char *dest, const char *src);
-char				*ft_chardup(char c);
 char				*ft_strcpy(char *dest, const char *str);
 char				*ft_strdup(const char *s);
 char				*ft_strstr(const char *haystack, const char *needle);
-char				*ft_itoa(int n);
-char				*ft_itoa_base(int value, int base, int upper);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_f(char const *s1, char const *s2, int j);
 char				*get_name_champ(t_board *bd, int id);
