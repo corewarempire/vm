@@ -51,6 +51,7 @@ typedef struct		s_champ
 	int				player_id;
 	int				fd;
 	int				process_count;
+	int				header_champsize;
 	char			*name;
 	char			*comment;
 }					t_champ;
@@ -154,6 +155,9 @@ int					get_reg(t_process *proc, unsigned int index);
 
 int					init_board_data(t_board **bd, char **argv);
 t_board				*collect_inputs(char **argv, int argc, t_board *bd);
+void        		add_champ_to_lst(t_board *bd, t_champ *champ);
+int      			open_champ(t_board *bd, char **argv, int i, int op);
+int             	get_first_number(t_board *bd, int i);
 void				init_f(void (*f[17])(t_board *b, int player));
 int					ft_error(int id, int errn);
 int					insert_instructions(t_board *board);

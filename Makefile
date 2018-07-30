@@ -16,8 +16,8 @@ OBJLIB_PATH = ./obj
 
 # .o de la lib dans la lib / inc ne verifie pas si recompile pas avec un make
 
-SRC_NAME =	main.c tools.c		insert_instructions.c \
-			collect_inputs.c	play.c \
+SRC_NAME =	main.c tools.c		insert_instructions.c 	collect_champ.c \
+			collect_inputs.c	play.c 					collecting_tools.c \
 			init_process.c		check_instruction.c \
 			add.c				aff.c \
 			and.c				fork.c \
@@ -31,7 +31,7 @@ SRC_NAME =	main.c tools.c		insert_instructions.c \
 			get_dir.c			get_indir.c \
 			get_reg.c			process.c \
 			get_params.c		purge_process.c \
-			get_name_champ.c	memclear.c
+			get_name_champ.c	memclear.c \
 
 LIB_NAME = 	ft_putchar.c ft_putstr.c ft_chardup.c ft_strdup.c \
 			ft_itoa.c ft_atoi.c ft_itoa_base.c ft_memalloc.c ft_memalloc_c.c \

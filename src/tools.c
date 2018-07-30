@@ -17,13 +17,9 @@ void    ft_usage(void)
 int    ft_error(int id, int errn)
 {
     if (id == 1)
-    {
         ft_putstr_fd("ERROR: Memory Allocation failed.\n\n", 2);
-    }
     else if (id == 2)
-    {
         ft_putstr_fd("ERROR: Wrong flag usage.\n\n", 2);
-    }
         else if (id == 3)
     {
         ft_putstr_fd("ERROR : Wrong [champion].cor file", 2);
@@ -31,11 +27,11 @@ int    ft_error(int id, int errn)
             ft_put3str(" -> ", strerror(errno), ".\n\n");
         else
             ft_putstr(".\n\n");
-    }        
-    else if (id == 6)
-    {
-        ft_putstr_fd("ERROR: Wrong [champion].cor count [1 - 4]\n\n", 2);
     }
+    else if (id == 4)
+        ft_putstr_fd("ERROR: Wrong [champion].cor header\n\n", 2);
+    else if (id == 6)
+        ft_putstr_fd("ERROR: Wrong [champion].cor count [1 - 4]\n\n", 2);
     ft_usage();
     return (0);
 }
