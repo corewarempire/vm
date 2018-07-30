@@ -4,7 +4,6 @@ void	aff(t_board *bd, t_process *proc)
 {
 	char	r;
 
-	printf("aff\n");	
 	if (bd->ram[MEM_MOD(proc->pc + 2)] > 0 && bd->ram[MEM_MOD(proc->pc + 2)] < 16)
 	{
 		r = proc->r[bd->ram[MEM_MOD(proc->pc + 2)] - 1] % 256;

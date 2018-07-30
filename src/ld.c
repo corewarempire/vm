@@ -16,7 +16,6 @@ void	ld(t_board *bd, t_process *proc)
 	int	reg;
 	int	value;
 
-	printf("ld\n");
 	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc + 1)]);
 	value = (ocp == IND_CODE) ? get_dir4(bd, proc->pc + (get_indir(bd, proc->pc
 			+ 2) % IDX_MOD)) : get_dir4(bd, proc->pc + 2);
@@ -27,9 +26,10 @@ void	ld(t_board *bd, t_process *proc)
 	{
 		proc->pc += (ocp == IND_CODE) ? 5 : 7;
 		return ;
-	}
+	}	
 	if (reg > 0 && reg < 17)
 	{
+		// printf("ld r%d set value %d\n", reg, value);
 		proc->carry = (!(proc->r[reg - 1] = value)) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, value, reg);

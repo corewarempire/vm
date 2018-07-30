@@ -29,7 +29,6 @@ void	live(t_board *bd, t_process *proc)
 {
 	int				val;
 
-	printf("live\n");
 	val = get_dir4(bd, proc->pc + 1);
 	proc->last_live = bd->cycle;
 	bd->total_cycle_live++;
