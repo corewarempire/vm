@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/31 00:13:48 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:58:43 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,19 +155,18 @@ int					get_reg(t_process *proc, unsigned int index);
 
 int					init_board_data(t_board **bd, char **argv);
 t_board				*collect_inputs(char **argv, int argc, t_board *bd);
-void        		add_champ_to_lst(t_board *bd, t_champ *champ);
-int      			open_champ(t_board *bd, char **argv, int i, int op);
-int             	get_first_number(t_board *bd, int i);
+void				add_champ_to_lst(t_board *bd, t_champ *champ);
+int					open_champ(t_board *bd, char **argv, int i, int op);
+int					get_first_number(t_board *bd, int i);
 void				init_f(void (*f[17])(t_board *b, int player));
 int					ft_error(int id, int errn);
 int					insert_instructions(t_board *board);
 void				print_memory(t_board *bd, int id);
 void				print_champ_lst(t_board *bd);
-void    			print_verbose_data(t_board *bd);
-int	    			ft_usage(void);
-
+void				print_verbose_data(t_board *bd);
+int					ft_usage(void);
 void				ft_putnbrstrnbr(int nb, char *str, int n);
-void				ft_putstrnbrstr(char  *s, int nb, char *str);
+void				ft_putstrnbrstr(char *s, int nb, char *str);
 void				ft_put3str(char const *s, char *s2, char *s3);
 void				ft_bzero(void *s, size_t n);
 void				ft_putchar_fd(char c, int fd);
