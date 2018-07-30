@@ -43,15 +43,10 @@ void	purge_process(t_board *bd)
 
 	proc = bd->lst_process->process;
 	last = 0;
-	// printf("=========================\n");
-	// printf("PURGE:\n");
-	// printf("Cycle to die %d\n", bd->cycle_to_die);
 	while (proc)
 	{
-		// printf("Last live:%d | Last purge:%d\n", proc->last_live, bd->last_check_purge);
 		if (proc->last_live <= bd->last_check_purge)
 		{
-			// printf("SHOULD CLEAN %d\n", bd->cycle);
 			update_process_count(bd, proc->id_player, -1);
 			pkill(bd, &last, &proc);
 		}
@@ -61,5 +56,4 @@ void	purge_process(t_board *bd)
 			proc = proc->next;
 		}
 	}
-	// printf("=========================\n");
 }

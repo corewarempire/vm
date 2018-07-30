@@ -1,8 +1,5 @@
 #include "corewar.h"
 
-	// {"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
-
-
 static void	verbosity(t_process *proc, t_process *new)
 {
 	ft_putstrnbrstr("Player ", new->id_player, " // Process ");
@@ -29,6 +26,7 @@ void	frk(t_board *bd, t_process *proc)
 		new->r[i] = proc->r[i];
 		i++;
 	}
+	new->last_live = proc->last_live;
 	new->carry = proc->carry;
 	new->pc = proc->pc + (newpc % IDX_MOD);
 	proc->pc += 3;

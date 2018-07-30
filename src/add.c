@@ -38,12 +38,12 @@ void	add(t_board *bd, t_process *proc)
 		v2 = proc->r[bd->ram[MEM_MOD(proc->pc + 3)] - 1];
 		proc->carry = (!(v2 + v1)) ? 1 : 0;
 		proc->r[bd->ram[MEM_MOD(proc->pc + 4)] - 1] = v1 + v2;
-		// printf("Calcule registre r%d + r%d => r%d\n",
-		// 	bd->ram[MEM_MOD(proc->pc + 2)],
-		// 	bd->ram[MEM_MOD(proc->pc + 3)],
-		// 	bd->ram[MEM_MOD(proc->pc + 4)]
-		// 	);
-		// printf("Calcule add %d + %d => %d\n", v1, v2, v1 + v2);
+		printf("Calcule registre r%d + r%d => r%d\n",
+			bd->ram[MEM_MOD(proc->pc + 2)],
+			bd->ram[MEM_MOD(proc->pc + 3)],
+			bd->ram[MEM_MOD(proc->pc + 4)]
+			);
+		printf("Calcule add %d + %d => %d\n", v1, v2, v1 + v2);
 		if (bd->verbose[1])
 			verbisity(bd, proc, v1, v2);
 	}

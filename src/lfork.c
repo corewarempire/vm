@@ -26,7 +26,9 @@ void	lfork(t_board *bd, t_process *proc)
 		new->r[i] = proc->r[i];
 		i++;
 	}
-	new->pc = MEM_MOD(proc->pc + newpc);
+	new->last_live = proc->last_live;
+	new->carry = proc->carry;
+	new->pc = proc->pc + newpc;
 	proc->pc += 3;
 	update_process_count(bd, proc->id_player, 1);
 	if (bd->verbose[1])
