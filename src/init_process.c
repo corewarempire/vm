@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 00:07:00 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 01:37:13 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int		init_process(t_board *bd)
 		return (0);
 	while (i < bd->champions_count)
 	{
-		if (!(proc = add_process(bd->lst_process,
-				bd->id_process++, champ->player_id, pc)))
+		if (!(proc = add_process(bd, champ->player_id, pc)))
 			return (0);
 		proc->last_live = bd->cycle;
 		pc += MEM_SIZE / bd->champions_count;
