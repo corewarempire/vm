@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 00:14:14 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 01:46:54 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,27 @@ int		error_management(t_board *fucked_board)
 	return (-1);
 }
 
+void	show_winner(t_board *bd)
+{
+	t_champ *champ;
+
+	champ = bd->first_champ;
+	while (champ)
+	{
+		if (champ->player_id == bd->last_live)
+		{
+			ft_putstr("Winner: Player#");
+			ft_putnbr(champ->player_id);
+			ft_putstr(" connu sour le nom de ");
+			ft_putstr(champ->name);
+			ft_putstr("\n");
+			return ;
+		}
+		champ = champ->next;
+	}
+	ft_putstr("No winner...\n");
+}
+
 int		main(int argc, char **argv)
 {
 	t_board	*board;
@@ -70,6 +91,7 @@ int		main(int argc, char **argv)
 	if (board->verbose[0])
 		print_champ_lst(board);
 	play(board);
+	show_winner(board);
 	if (board->verbose[4])
 		print_memory(board, 0);
 	memclear(board);
