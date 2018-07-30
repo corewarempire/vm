@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 00:10:27 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 01:36:49 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void		lfork(t_board *bd, t_process *proc)
 
 	i = 0;
 	newpc = get_dir2(bd, proc->pc + 1);
-	if ((new = add_process(bd->lst_process,
-		bd->id_process++, proc->id_player, proc->pc)))
+	if ((new = add_process(bd, proc->id_player, proc->pc)))
 	{
 		while (i < 16)
 		{

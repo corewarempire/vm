@@ -116,8 +116,7 @@ static const t_op	g_op_tab[17] =
 };
 
 t_lst_process		*init_list_process(void);
-t_process			*add_process(t_lst_process *lst,
-						unsigned int id_process, int r1, unsigned int pc);
+t_process			*add_process(t_board *bd, int r1, unsigned int pc);
 void				update_process_count(t_board *bd, int id, int op);
 void				set_ramvalue(t_board *bd,
 						unsigned int pc, unsigned int value);

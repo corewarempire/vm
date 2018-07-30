@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:12:33 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 01:36:30 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,44 @@ t_process		*new_process(unsigned int id_process,
 	return (new);
 }
 
-t_process		*add_process(t_lst_process *lst,
-	unsigned int id_process, int r1, unsigned int pc)
+int				could_already_create(t_board *bd, int r1)
+{
+	t_champ *champ;
+
+	if (!bd->p)
+		return (1);
+	champ = bd->first_champ;
+	while (champ)
+	{
+		if (champ->player_id == r1
+			&& champ->process_count < (int)(bd->p / bd->champions_count))
+			return (1);
+		champ = champ->next;
+	}
+	return (0);
+}
+
+t_process		*add_process(t_board *bd, int r1, unsigned int pc)
 {
 	t_process	*process;
 	t_process	*new;
 
-	process = lst->process;
-	if (!(new = new_process(id_process, r1, MEM_MOD(pc))))
+	process = bd->lst_process->process;
+	if (!could_already_create(bd, r1)
+		|| !(new = new_process(bd->id_process, r1, MEM_MOD(pc))))
 		return (0);
+	bd->id_process++;
 	if (process)
 	{
 		new->next = process;
-		lst->process = new;
-		lst->len++;
+		bd->lst_process->process = new;
+		bd->lst_process->len++;
 		return (new);
 	}
 	else
 	{
-		lst->process = new;
-		lst->len++;
+		bd->lst_process->process = new;
+		bd->lst_process->len++;
 		return (new);
 	}
 }
