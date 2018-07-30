@@ -36,6 +36,8 @@ static int      check_arg_ii(t_board *bd, char **argv, int *i, int n)
             return (ft_error(2, 0));
         else
             *i += 1;
+    else if (n == 3)
+		bd->p = MAX_PROC;
     else if (!open_champ(bd, argv, *i, 0))
         return (0);
     return (1);
@@ -43,10 +45,10 @@ static int      check_arg_ii(t_board *bd, char **argv, int *i, int n)
 
 static int      check_arg(t_board *bd, char **argv, int *i)
 {
-    static char *opt_list[3] = {"-n", "-d", "-v"};
+	static char *opt_list[5] = {"-n", "-d", "-v", "-p", NULL};
     int         n;
 
-    n = 4;
+    n = 6;
     if (argv[*i][0] == '-' && (n = pos_str_tab(argv[*i], opt_list)) == -1)
         return (ft_error(2, 0));
     else if (n == 0)

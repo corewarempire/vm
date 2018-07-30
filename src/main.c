@@ -25,6 +25,7 @@ void	init_struct(t_board *bd)
 	bd->dump = -1;
 	bd->total_cycle_live = 0;
 	bd->check_nbr = 0;
+	bd->p = 0;
 }
 
 int		init_board_data(t_board **bd, char **argv)

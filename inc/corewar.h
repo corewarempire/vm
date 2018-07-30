@@ -23,6 +23,7 @@
 # include "op.h"
 
 # define BUFF_SIZE 4
+# define MAX_PROC 200000
 # define MEM_MOD(x) ((x) % MEM_SIZE)
 
 typedef struct		s_process
@@ -70,6 +71,7 @@ typedef struct		s_board
 	unsigned char	*ram;
 	unsigned int	dump;
 	int				cycle_to_die;
+	int				p;
 	char			*opt_list;
 	char			*verbose;
 }					t_board;
