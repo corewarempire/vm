@@ -1,21 +1,4 @@
 Map-Champs:
  ☐ Code des champions n'est pas au bonne endroit. Le premier apparait en bas
-
-Fonctions debuge:
- ✔ ldi @done (18-07-29 18:17)
- ✔ lldi @done (18-07-29 18:17)
- ✔ sti @done (18-07-29 18:20)
- ✔ st @done (18-07-29 18:58)
- ✔ lld @done (18-07-29 19:00)
- ✔ ldi @done (18-07-29 19:00)
- ✔ ld @done (18-07-29 19:00)
- ✔ live @done (18-07-29 19:08)
- ✔ zjump @done (18-07-29 19:21)
- ✔ fork @done (18-07-29 19:32)
- ✔ add @done (18-07-29 19:32)
- ☐ and
- ☐ aff
- ☐ or
- ✔ xor @done (18-07-29 21:15)
- ✔ sub @done (18-07-29 19:44)
- ✔ lfork @done (18-07-29 19:38)
+Corriger:
+  ☐ sti n'est pas du tout bon // Get args a revoir, l'ocp 2 n'est pas utilise correctement
