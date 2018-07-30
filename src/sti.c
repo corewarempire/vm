@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-static void	verbosity(t_board *bd, t_process *proc, unsigned char *ocp, int *val)
+static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nSti r", bd->ram[proc->pc + 2]);
@@ -11,32 +11,69 @@ static void	verbosity(t_board *bd, t_process *proc, unsigned char *ocp, int *val
 	ft_putstr(".\n\n");
 }
 
+static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
+{
+	int res;
+
+	if (ocp == REG_CODE)
+	{
+		res = bd->ram[MEM_MOD(*pc)];
+		(*pc) += 1;
+	}
+	else if (ocp == DIR_CODE)
+	{
+		res = (flag) ? get_dir4(bd, *pc) : get_dir2(bd, *pc);
+		(*pc) += (flag) ? 4 : 2;
+	}
+	else if (ocp == IND_CODE)
+	{
+		res = (flag) ? get_indir(bd, *pc) : get_dir2(bd, *pc);
+		(*pc) += 2;
+	}
+	return (res);
+}
+
+static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
+{
+	if (val[0] < 1 || val[0] > 16)
+	{
+		return (0);
+	}
+	if (ocp[1] == REG_CODE && (val[1] < 1 || val[1] > 16))
+	{
+		return (0);
+	}
+	val[0] = proc->r[val[0] - 1];
+	if (ocp[1] == REG_CODE)
+		val[1] = proc->r[val[1] - 1];
+	if (ocp[2] == REG_CODE)
+		val[2] = proc->r[val[2] - 1];
+	return (1);
+}
+
 void	sti(t_board *bd, t_process *proc)
 {
-	unsigned char	ocp[2];
-	int				val[3];
-	int				offset;
+	int	ocp[3];
+	int	val[3];
+	int	offset;
+	int	i;
 
-	ocp[0] = ocp_scd(bd->ram[MEM_MOD(proc->pc + 1)]);
-	ocp[1] = ocp_third(bd->ram[MEM_MOD(proc->pc + 1)]);
-	val[0] = proc->r[bd->ram[proc->pc + 2] - 1];
-	if (ocp[0] == REG_CODE)
+	ocp[0] = REG_CODE;
+	ocp[1] = ocp_scd(bd->ram[MEM_MOD(proc->pc + 1)]);
+	ocp[2] = ocp_third(bd->ram[MEM_MOD(proc->pc + 1)]);
+	i = 0;
+	offset = proc->pc + 2;
+	while (i < 3)
 	{
-		val[1] = proc->r[bd->ram[proc->pc + 3] - 1];
-		val[2] = (ocp[1] == DIR_CODE) ? get_dir2(bd, proc->pc + 4) : proc->r[bd->ram[proc->pc + 4] - 1];
-		offset = (ocp[1] == DIR_CODE) ? 6 : 5;
+		val[i] = get_value(bd, &offset, ocp[i], 1);
+		i++;
 	}
-	else
+	if (valid_args(bd, proc, ocp, val))
 	{
-		val[1] = (ocp[0] == IND_CODE) ? get_indir(bd, proc->pc + 3) : get_dir2(bd, proc->pc + 3);
-		if (ocp[0] == IND_CODE)
-			val[1] = get_dir4(bd, proc->pc + val[1]);
-		val[2] = (ocp[1] == DIR_CODE) ? get_dir2(bd, proc->pc + 5) : proc->r[bd->ram[proc->pc + 5] - 1];
-		offset = (ocp[1] == DIR_CODE) ? 7 : 6;
+		if (bd->verbose[1])
+			verbosity(bd, proc, ocp, val);
+		proc->carry = (!val[0]) ? 1 : 0;
+		set_ramvalue(bd, (proc->pc + ((val[1] + val[2]) % IDX_MOD)), val[0]);
 	}
-	if (bd->verbose[1])
-		verbosity(bd, proc, ocp, val);
-	proc->carry = (!val[0]) ? 1 : 0;
-	set_ramvalue(bd, (proc->pc + ((val[1] + val[2]) % IDX_MOD)), val[0]);
 	proc->pc += offset;
 }

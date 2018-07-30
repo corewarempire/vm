@@ -1,22 +1,43 @@
 #include "corewar.h"
 
+static void		verbosity(t_board *bd, t_process *proc, int val[3])
+{
+	ft_putstrnbrstr("\n\nPlayer ", proc->id_player, " // Process ");
+	ft_putnbrstrnbr(proc->id_process, "\nSub (r", val[0]);
+	ft_putstrnbrstr(" - r", val[1], ") to r");
+	ft_putnbrstrnbr(val[2], " = ", val[0] - val[1]);
+	ft_putstrnbrstr(". Carry : ", proc->carry, "\n\n");
+}
+
+static int		valid_args(int val[3])
+{
+	int i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (val[i] < 1 || val[i] > 16)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	sub(t_board *bd, t_process *proc)
 {
-	unsigned int	pc;
-	int				v1;
-	int				v2;
+	int		val[3];
 
-	pc = proc->pc + 2;
-	v1 = proc->r[bd->ram[MEM_MOD(pc++)] - 1];
-	v2 = proc->r[bd->ram[MEM_MOD(pc++)] - 1];
-	proc->carry = (!(v1 + v2)) ? 1 : 0;
-	proc->r[bd->ram[MEM_MOD(pc++)] - 1] = (v1 - v2);
-	proc->pc = pc;
-	if (!bd->verbose[1])
-		return ;
-	ft_putstrnbrstr("\n\nPlayer ", proc->id_player, " // Process ");
-	ft_putnbrstrnbr(proc->id_process, "\nSub (r", bd->ram[MEM_MOD(proc->pc - 3)]);
-	ft_putstrnbrstr(" - r", bd->ram[MEM_MOD(proc->pc - 2)], ") to r");
-	ft_putnbrstrnbr(bd->ram[MEM_MOD(proc->pc - 1)], " = ", v1 - v2);
-	ft_putstrnbrstr(". Carry : ", proc->carry, "\n\n");
+	val[0] = bd->ram[MEM_MOD(proc->pc + 2)];
+	val[1] = bd->ram[MEM_MOD(proc->pc + 3)];
+	val[2] = bd->ram[MEM_MOD(proc->pc + 4)];
+	if (valid_args(val))
+	{
+		val[0] = proc->r[val[0] - 1];
+		val[1] = proc->r[val[1] - 1];
+		proc->carry = (!(val[0] - val[1])) ? 1 : 0;
+		proc->r[val[2] - 1] = (val[0] - val[1]);
+		if (!bd->verbose[1])
+			verbosity(bd, proc, val);
+	}
+	proc->pc += 5;
 }

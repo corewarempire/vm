@@ -32,6 +32,23 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	return (res);
 }
 
+static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
+{
+	if (ocp[0] == REG_CODE && (val[0] < 1 || val[0] > 16))
+		return (0);
+	if (ocp[1] == REG_CODE && (val[1] < 1 || val[1] > 16))
+		return (0);
+	if (val[2] < 1 || val[2] > 16)
+		return (0);
+	if (ocp[0] == REG_CODE)
+		val[0] = proc->r[val[0] - 1];
+	if (ocp[1] == REG_CODE)
+		val[1] = proc->r[val[1] - 1];
+	if (ocp[0] == IND_CODE)
+		val[0] = get_dir4(bd, (val[0] % IDX_MOD) + proc->pc);
+	return (1);
+}
+
 void			ldi(t_board *bd, t_process *proc)
 {
 	int		ocp[3];
@@ -50,15 +67,12 @@ void			ldi(t_board *bd, t_process *proc)
 		val[i] = get_value(bd, &offset, ocp[i], 0);
 		i++;
 	}
-	if (ocp[0] == REG_CODE)
-		val[0] = proc->r[val[0] - 1];
-	if (ocp[1] == REG_CODE)
-		val[1] = proc->r[val[1] - 1];
-	if (ocp[0] == IND_CODE)
-		val[0] = get_dir4(bd, (val[0] % IDX_MOD) + proc->pc);
-	proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
-	proc->carry = (!proc->r[val[2] - 1]) ? 1 : 0;
-	if (bd->verbose[1])
-		verbosity(bd, proc, ocp, val);
+	if (valid_args(bd, proc, ocp, val))
+	{
+		proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
+		proc->carry = (!proc->r[val[2] - 1]) ? 1 : 0;
+		if (bd->verbose[1])
+			verbosity(bd, proc, ocp, val);
+	}
 	proc->pc = offset;
 }

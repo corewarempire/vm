@@ -36,8 +36,6 @@ void	run(t_board *bd)
 				!check_process_status(bd)) || (bd->cycle_to_die <= 0))
 			break ;
 		bd->cycle++;
-		if (bd->cycle > 20000)
-			exit(1);
 		proc = bd->lst_process->process;
 	}
 }

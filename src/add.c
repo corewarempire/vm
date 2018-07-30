@@ -12,21 +12,35 @@ static void	verbisity(t_board *bd, t_process *proc, int v1, int v2)
 	ft_putstr("\n\n");
 }
 
+static int	valid_instruction(t_board *bd, t_process *proc)
+{
+	int i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (bd->ram[MEM_MOD(proc->pc + 2 + i)] < 1
+			|| bd->ram[MEM_MOD(proc->pc + 2 + i)] > 16)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	add(t_board *bd, t_process *proc)
 {
-	unsigned int 	pc;
 	int				v1;
 	int				v2;
 
-	proc->pc += 2;
-	v1 = proc->r[bd->ram[MEM_MOD(proc->pc)] - 1];
-	proc->pc++;
-	v2 = proc->r[bd->ram[MEM_MOD(proc->pc)] - 1];
-	proc->pc++;
-	proc->carry = (!(v2 + v1)) ? 1 : 0;
-	if (bd->ram[MEM_MOD(proc->pc)])
-		proc->r[bd->ram[MEM_MOD(proc->pc)] - 1] = v1 + v2;
-	proc->pc++;
-	if (bd->verbose[1])
-		verbisity(bd, proc, v1, v2);
+	if (valid_instruction(bd, proc))
+	{
+		v1 = proc->r[bd->ram[MEM_MOD(proc->pc + 2)] - 1];
+		v2 = proc->r[bd->ram[MEM_MOD(proc->pc + 3)] - 1];
+		proc->carry = (!(v2 + v1)) ? 1 : 0;
+		if (bd->ram[MEM_MOD(proc->pc + 4)])
+			proc->r[bd->ram[MEM_MOD(proc->pc + 4)] - 1] = v1 + v2;
+		if (bd->verbose[1])
+			verbisity(bd, proc, v1, v2);
+	}
+	proc->pc += 5;
 }
