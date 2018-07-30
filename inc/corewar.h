@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/30 23:43:51 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:13:48 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		s_process
 	int					carry;
 	int					exec_cycle;
 	int					op_code;
-	int					last_live;
+	unsigned int		last_live;
 	unsigned int		id_process;
 	unsigned int		pc;
 }					t_process;
@@ -68,7 +68,7 @@ typedef struct		s_board
 	unsigned int	check_nbr;
 	unsigned int	total_cycle_live;
 	unsigned char	*ram;
-	int				dump;
+	unsigned int	dump;
 	int				cycle_to_die;
 	char			*opt_list;
 	char			*verbose;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adhondt <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:06:53 by adhondt           #+#    #+#             */
-/*   Updated: 2018/06/14 13:26:26 by adhondt          ###   ########.fr       */
+/*   Updated: 2018/07/31 00:16:48 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	ft_atoi_base(const char *str, int base)
 	int	length;
 	int	i;
 
-    printf("HERE:%s|\n", str);
 	if (base == 10)
 		return (ft_atoi(str));
 	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'

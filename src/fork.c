@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 23:25:08 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:37:34 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:07:43 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	verbosity(t_process *proc, t_process *new)
 void		frk(t_board *bd, t_process *proc)
 {
 	t_process		*new;
-	unsigned int	pc;
 	int				newpc;
 	int				i;
 

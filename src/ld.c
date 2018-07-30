@@ -6,13 +6,13 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 21:01:53 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:34:07 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:08:24 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	verbosity(t_board *bd, t_process *proc, int value, int reg)
+static void	verbosity(t_process *proc, int value, int reg)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nLd ", value);
@@ -24,7 +24,6 @@ static void	verbosity(t_board *bd, t_process *proc, int value, int reg)
 void		ld(t_board *bd, t_process *proc)
 {
 	int	ocp;
-	int	offset;
 	int	reg;
 	int	value;
 
@@ -44,7 +43,7 @@ void		ld(t_board *bd, t_process *proc)
 	{
 		proc->carry = (!(proc->r[reg - 1] = value)) ? 1 : 0;
 		if (bd->verbose[1])
-			verbosity(bd, proc, value, reg);
+			verbosity(proc, value, reg);
 	}
 	proc->pc += (ocp == IND_CODE) ? 5 : 7;
 }

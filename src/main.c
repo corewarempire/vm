@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:48:07 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:14:14 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		main(int argc, char **argv)
 		return (error_management(board));
 	if (board->verbose[0])
 		print_champ_lst(board);
-	// play(board);
+	play(board);
 	if (board->verbose[4])
 		print_memory(board, 0);
 	memclear(board);

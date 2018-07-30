@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:55:01 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:13:58 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:05:28 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		check_process_status(t_board *bd)
 
 void	run(t_board *bd)
 {
-	unsigned int	last_check_purge;
 	t_process		*proc;
 
 	bd->last_check_purge = 0;

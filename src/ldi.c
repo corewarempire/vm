@@ -6,13 +6,13 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 21:02:43 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:28:55 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:15:44 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
+static void		verbosity(t_process *proc, int *val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nLdi (", val[0]);
@@ -27,6 +27,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 {
 	int res;
 
+	res = 0;
 	if (ocp == REG_CODE)
 	{
 		res = bd->ram[MEM_MOD(*pc)];
@@ -39,7 +40,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	}
 	else if (ocp == IND_CODE)
 	{
-		res = (flag) ? get_indir(bd, *pc) : get_dir2(bd, *pc);
+		res = (flag) ? get_indir(bd, *pc) : get_indir(bd, *pc);
 		(*pc) += 2;
 	}
 	return (res);
@@ -86,7 +87,7 @@ void			ldi(t_board *bd, t_process *proc)
 			((val[0] + val[1]) % IDX_MOD) + proc->pc);
 		proc->carry = (!proc->r[val[2] - 1]) ? 1 : 0;
 		if (bd->verbose[1])
-			verbosity(bd, proc, ocp, val);
+			verbosity(proc, val);
 	}
 	proc->pc = offset;
 }

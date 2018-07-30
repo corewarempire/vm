@@ -6,13 +6,13 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:07:24 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:17:28 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		verbosity(t_board *bd, t_process *proc, int val[3])
+static void		verbosity(t_process *proc, int val[3])
 {
 	ft_putstrnbrstr("\n\nPlayer ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nSub (r", val[0]);
@@ -48,8 +48,8 @@ void			sub(t_board *bd, t_process *proc)
 		val[1] = proc->r[val[1] - 1];
 		proc->carry = (!(val[0] - val[1])) ? 1 : 0;
 		proc->r[val[2] - 1] = (val[0] - val[1]);
-		if (!bd->verbose[1])
-			verbosity(bd, proc, val);
+		if (bd->verbose[1])
+			verbosity(proc, val);
 	}
 	proc->pc += 5;
 }

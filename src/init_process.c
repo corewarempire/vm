@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:16:34 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:07:00 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		init_process(t_board *bd)
 {
-	int			i;
-	int			pc;
-	t_process	*proc;
-	t_champ		*champ;
+	unsigned int	i;
+	int				pc;
+	t_process		*proc;
+	t_champ			*champ;
 
 	i = 0;
 	pc = 0;

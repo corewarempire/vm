@@ -6,13 +6,13 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 23:01:41 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:08:09 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 00:16:34 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
+static void		verbosity(t_board *bd, t_process *proc, int *val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process,
@@ -29,6 +29,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 {
 	int res;
 
+	res = 0;
 	if (ocp == REG_CODE)
 	{
 		res = bd->ram[MEM_MOD(*pc)];
@@ -41,7 +42,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	}
 	else if (ocp == IND_CODE)
 	{
-		res = (flag) ? get_indir(bd, *pc) : get_dir2(bd, *pc);
+		res = (flag) ? get_indir(bd, *pc) : get_indir(bd, *pc);
 		(*pc) += 2;
 	}
 	return (res);
@@ -58,8 +59,6 @@ static int		valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 		val[1] = proc->r[val[1] - 1];
 	else if (ocp[1] == IND_CODE)
 		val[1] = get_dir2(bd, proc->pc + val[1]);
-	else
-		printf(" dir val1:%d ", val[1]);
 	if (ocp[2] == REG_CODE)
 		val[2] = proc->r[val[2] - 1];
 	return (1);
@@ -87,7 +86,7 @@ void			sti(t_board *bd, t_process *proc)
 		set_ramvalue(bd, (proc->pc + ((val[1] + val[2]) % IDX_MOD)), val[0]);
 		proc->carry = (!val[0]) ? 1 : 0;
 		if (bd->verbose[1])
-			verbosity(bd, proc, ocp, val);
+			verbosity(bd, proc, val);
 	}
 	proc->pc = offset;
 }

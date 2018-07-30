@@ -2,9 +2,12 @@
 
 static int      dump(t_board *bd, char **argv, int i)
 {
-    bd->dump = ft_atoi(argv[i + 1]);
-    if (bd->dump < 0)
+    int dump;
+
+    dump = ft_atoi(argv[i + 1]);
+    if (dump < 0)
         return (0);
+    bd->dump = dump;
     return (1);
 }
 
