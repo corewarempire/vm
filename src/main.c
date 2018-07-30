@@ -68,9 +68,7 @@ int		main(int argc, char **argv)
 		return (error_management(board));
 	if (board->verbose[0])
 		print_champ_lst(board);
-	play(board);
-	printf("Le champion gagnant:%d\n", board->last_live);
-	printf("Cycle end %d\n", board->cycle);
+	// play(board);
 	if (board->verbose[4])
 		print_memory(board, 0);
 	memclear(board);

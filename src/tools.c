@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 23:05:59 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:44:13 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 23:57:40 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_usage(void)
 
 int		ft_error(int id, int errn)
 {
+<<<<<<< HEAD
 	if (id == 1)
 		ft_putstr_fd("ERROR: Memory Allocation failed.\n\n", 2);
 	else if (id == 2)

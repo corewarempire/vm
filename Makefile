@@ -14,8 +14,9 @@ INC_PATH = ./inc
 OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
-SRC_NAME =	main.c tools.c		insert_instructions.c \
-			collect_inputs.c	play.c \
+
+SRC_NAME =	main.c tools.c		insert_instructions.c 	collect_champ.c \
+			collect_inputs.c	play.c 					collecting_tools.c \
 			init_process.c		check_instruction.c \
 			add.c				aff.c \
 			and.c				fork.c \
