@@ -22,6 +22,11 @@ void	ld(t_board *bd, t_process *proc)
 	proc->carry = (!value) ? 1 : 0;
 	reg = (ocp == IND_CODE) ? bd->ram[MEM_MOD(proc->pc + 4)]
 		: bd->ram[MEM_MOD(proc->pc + 6)];
+	if (ocp == REG_CODE && (reg < 1 || reg > 16))
+	{
+		proc->pc += (ocp == IND_CODE) ? 5 : 7;
+		return ;
+	}
 	if (reg > 0 && reg < 17)
 	{
 		proc->carry = (!(proc->r[reg - 1] = value)) ? 1 : 0;
