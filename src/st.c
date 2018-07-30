@@ -28,6 +28,7 @@ void	st(t_board *bd, t_process *proc)
 	int		value_reg;
 	int		value;
 
+	printf("st\n");
 	ocp = ocp_scd(bd->ram[MEM_MOD(proc->pc + 1)]);
 	value = (ocp == REG_CODE) ? bd->ram[MEM_MOD(proc->pc + 3)] : get_indir(bd, proc->pc + 3);
 	if (valid_args(bd, proc, ocp, value))

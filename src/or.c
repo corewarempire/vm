@@ -57,6 +57,7 @@ void	or(t_board *bd, t_process *proc)
 	int		offset;
 	int		i;
 
+	printf("or\n");
 	offset = proc->pc + 1;
 	ocp[0] = ocp_first(bd->ram[MEM_MOD(offset)]);
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(offset)]);

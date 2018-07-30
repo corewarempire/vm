@@ -16,6 +16,7 @@ void	ld(t_board *bd, t_process *proc)
 	int	reg;
 	int	value;
 
+	printf("ld\n");
 	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc + 1)]);
 	value = (ocp == IND_CODE) ? get_dir4(bd, proc->pc + (get_indir(bd, proc->pc
 			+ 2) % IDX_MOD)) : get_dir4(bd, proc->pc + 2);

@@ -32,6 +32,7 @@ void	add(t_board *bd, t_process *proc)
 	int				v1;
 	int				v2;
 
+	printf("qdd\n");
 	if (valid_instruction(bd, proc))
 	{
 		v1 = proc->r[bd->ram[MEM_MOD(proc->pc + 2)] - 1];

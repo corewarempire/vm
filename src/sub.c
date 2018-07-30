@@ -27,6 +27,7 @@ void	sub(t_board *bd, t_process *proc)
 {
 	int		val[3];
 
+	printf("sub\n");
 	val[0] = bd->ram[MEM_MOD(proc->pc + 2)];
 	val[1] = bd->ram[MEM_MOD(proc->pc + 3)];
 	val[2] = bd->ram[MEM_MOD(proc->pc + 4)];

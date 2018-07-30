@@ -11,6 +11,7 @@ void	zjmp(t_board *bd, t_process *proc)
 {
 	int				val;
 
+	printf("zjmp\n");
 	val = get_dir2(bd, proc->pc + 1);
 	if (proc->carry)
 		proc->pc += (val % IDX_MOD);

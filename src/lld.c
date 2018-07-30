@@ -33,6 +33,7 @@ void	lld(t_board *bd, t_process *proc)
 	int	ocp;
 	int	value;
 
+	printf("lld\n");
 	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc + 1)]);
 	value = (ocp == DIR_CODE) ? get_dir4(bd, proc->pc + 2) :
 		get_dir2(bd, proc->pc + get_long_indir(bd, proc->pc + 2));

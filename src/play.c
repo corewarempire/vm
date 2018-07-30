@@ -32,6 +32,9 @@ void	run(t_board *bd)
 			check_instruction(bd, proc);
 			proc = proc->next;
 		}
+		printf("Numero du cycle %d\n", bd->cycle);
+		printf("Cycle to die %d\n", bd->cycle_to_die);
+		printf("Nombre de processs %d\n", bd->lst_process->len);
 		if ((bd->last_check_purge == bd->cycle - bd->cycle_to_die && 
 				!check_process_status(bd)) || (bd->cycle_to_die <= 0))
 			break ;

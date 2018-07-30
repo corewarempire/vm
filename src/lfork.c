@@ -13,9 +13,11 @@ void	lfork(t_board *bd, t_process *proc)
 	unsigned int	pc;
 	int				newpc;
 
+	printf("lfork\n");
 	newpc = get_dir2(bd, proc->pc + 1);
 	if (!(new = add_process(bd->lst_process, bd->id_process++, proc->id_player, proc->pc)))
 	{
+		proc->pc += 3;
 		printf("FAILED TO CREATE FORK NEED TO EXIT\n");
 		return ;
 	}

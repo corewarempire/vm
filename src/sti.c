@@ -60,6 +60,7 @@ void	sti(t_board *bd, t_process *proc)
 	int	offset;
 	int	i;
 
+	printf("sti\n");
 	i = 0;
 	offset = proc->pc + 2;
 	ocp[0] = REG_CODE;

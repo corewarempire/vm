@@ -13,6 +13,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 {
 	int res;
 
+	res = 0;
 	if (ocp == REG_CODE)
 	{
 		res = bd->ram[MEM_MOD(*pc)];
@@ -37,6 +38,8 @@ static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 		return (0);
 	if (ocp[1] == REG_CODE && (val[1] < 1 || val[1] > 16))
 		return (0);
+	if (val[2] < 1 || val[2] > 16)
+		return (0);
 	if (ocp[0] == REG_CODE)
 		val[0] = proc->r[val[0] - 1];
 	if (ocp[1] == REG_CODE)
@@ -55,6 +58,7 @@ void	and(t_board *bd, t_process *proc)
 	int		offset;
 	int		i;
 
+	printf("and\n");
 	offset = proc->pc + 1;
 	ocp[0] = ocp_first(bd->ram[MEM_MOD(offset)]);
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(offset)]);
