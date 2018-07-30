@@ -1,6 +1,16 @@
-#include "corewar.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_indir.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:29:10 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Modulo a rajouter de memsize? IDK
+#include "corewar.h"
 
 int		get_indir(t_board *bd, unsigned int pos)
 {

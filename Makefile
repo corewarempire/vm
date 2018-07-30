@@ -2,7 +2,7 @@
 
 CC = gcc -g
 
-FLAGS =# -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 CPP_FLAGS = -Iinclude
 
@@ -13,8 +13,6 @@ LIB_PATH = ./lib
 INC_PATH = ./inc
 OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
-
-# .o de la lib dans la lib / inc ne verifie pas si recompile pas avec un make
 
 SRC_NAME =	main.c tools.c		insert_instructions.c \
 			collect_inputs.c	play.c \
@@ -30,8 +28,8 @@ SRC_NAME =	main.c tools.c		insert_instructions.c \
 			ocp.c 				set_ramvalue.c \
 			get_dir.c			get_indir.c \
 			get_reg.c			process.c \
-			get_params.c		purge_process.c \
-			get_name_champ.c	memclear.c
+			memclear.c			purge_process.c \
+			get_name_champ.c
 
 LIB_NAME = 	ft_putchar.c ft_putstr.c ft_chardup.c ft_strdup.c \
 			ft_itoa.c ft_atoi.c ft_itoa_base.c ft_memalloc.c ft_memalloc_c.c \

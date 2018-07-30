@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:12:33 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-void	update_process_count(t_board *bd, int id, int op)
+void			update_process_count(t_board *bd, int id, int op)
 {
 	t_champ *tmp;
 

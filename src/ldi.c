@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ldi.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 21:02:43 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:28:55 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
+static void		verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nLdi (", val[0]);
 	ft_putstrnbrstr(" + ", val[1], ") -> ");
 	ft_putnbr(val[0] + val[1]);
-	ft_putstrnbrstr(" (with pc and mod ", proc->pc + ((val[0] + val[1]) % IDX_MOD), ")");
+	ft_putstrnbrstr(" (with pc and mod ",
+		proc->pc + ((val[0] + val[1]) % IDX_MOD), ")");
 	ft_putstr(".\n");
 }
 
@@ -32,7 +45,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	return (res);
 }
 
-static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
+static int		valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	if (ocp[0] == REG_CODE && (val[0] < 1 || val[0] > 16))
 		return (0);
@@ -69,7 +82,8 @@ void			ldi(t_board *bd, t_process *proc)
 	}
 	if (valid_args(bd, proc, ocp, val))
 	{
-		proc->r[val[2] - 1] = get_dir4(bd, ((val[0] + val[1]) % IDX_MOD) + proc->pc);
+		proc->r[val[2] - 1] = get_dir4(bd,
+			((val[0] + val[1]) % IDX_MOD) + proc->pc);
 		proc->carry = (!proc->r[val[2] - 1]) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, ocp, val);

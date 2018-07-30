@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sub.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:07:24 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static void		verbosity(t_board *bd, t_process *proc, int val[3])
@@ -23,9 +35,9 @@ static int		valid_args(int val[3])
 	return (1);
 }
 
-void	sub(t_board *bd, t_process *proc)
+void			sub(t_board *bd, t_process *proc)
 {
-	int		val[3];
+	int	val[3];
 
 	val[0] = bd->ram[MEM_MOD(proc->pc + 2)];
 	val[1] = bd->ram[MEM_MOD(proc->pc + 3)];

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ld.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 21:01:53 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:34:07 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static void	verbosity(t_board *bd, t_process *proc, int value, int reg)
@@ -9,7 +21,7 @@ static void	verbosity(t_board *bd, t_process *proc, int value, int reg)
 	ft_putstr("\n\n");
 }
 
-void	ld(t_board *bd, t_process *proc)
+void		ld(t_board *bd, t_process *proc)
 {
 	int	ocp;
 	int	offset;
@@ -17,8 +29,9 @@ void	ld(t_board *bd, t_process *proc)
 	int	value;
 
 	ocp = ocp_first(bd->ram[MEM_MOD(proc->pc + 1)]);
-	value = (ocp == IND_CODE) ? get_dir4(bd, proc->pc + (get_indir(bd, proc->pc
-			+ 2) % IDX_MOD)) : get_dir4(bd, proc->pc + 2);
+	value = (ocp == IND_CODE)
+		? get_dir4(bd, proc->pc + (get_indir(bd, proc->pc + 2) % IDX_MOD))
+		: get_dir4(bd, proc->pc + 2);
 	proc->carry = (!value) ? 1 : 0;
 	reg = (ocp == IND_CODE) ? bd->ram[MEM_MOD(proc->pc + 4)]
 		: bd->ram[MEM_MOD(proc->pc + 6)];
@@ -29,7 +42,6 @@ void	ld(t_board *bd, t_process *proc)
 	}	
 	if (reg > 0 && reg < 17)
 	{
-		// printf("ld r%d set value %d\n", reg, value);
 		proc->carry = (!(proc->r[reg - 1] = value)) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, value, reg);

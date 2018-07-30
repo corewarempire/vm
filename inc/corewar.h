@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/29 14:36:03 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 23:43:51 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int					insert_instructions(t_board *board);
 void				print_memory(t_board *bd, int id);
 void				print_champ_lst(t_board *bd);
 void    			print_verbose_data(t_board *bd);
-void    			ft_usage(void);
+int	    			ft_usage(void);
 
 void				ft_putnbrstrnbr(int nb, char *str, int n);
 void				ft_putstrnbrstr(char  *s, int nb, char *str);

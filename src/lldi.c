@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lldi.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:18:42 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
+static void		verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nLdi (", val[0]);
@@ -32,7 +44,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	return (res);
 }
 
-static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
+static int		valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	if (ocp[0] == REG_CODE && (val[0] < 1 || val[0] > 16))
 		return (0);
@@ -56,7 +68,6 @@ void			lldi(t_board *bd, t_process *proc)
 	int		offset;
 	int		i;
 
-	printf("lldi\n");
 	offset = proc->pc + 1;
 	ocp[0] = ocp_first(bd->ram[MEM_MOD(offset)]);
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(offset)]);

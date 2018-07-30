@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   or.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 23:10:40 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:10:49 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-static void	verbosity(t_board *bd, t_process *proc, int val[3])
+static void		verbosity(t_board *bd, t_process *proc, int val[3])
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nOR (", val[0]);
@@ -31,7 +43,7 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	return (res);
 }
 
-static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
+static int		valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	if (ocp[0] == REG_CODE && (val[0] < 1 || val[0] > 16))
 		return (0);
@@ -50,7 +62,7 @@ static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 	return (1);
 }
 
-void	or(t_board *bd, t_process *proc)
+void			or(t_board *bd, t_process *proc)
 {
 	int		ocp[3];
 	int		val[3];
@@ -70,7 +82,8 @@ void	or(t_board *bd, t_process *proc)
 	}
 	if (valid_args(bd, proc, ocp, val))
 	{
-		proc->carry = (!(proc->r[val[2] - 1] = val[0] | val[1])) ? 1 : 0;
+		proc->r[val[2] - 1] = val[0] | val[1];
+		proc->carry = (!(proc->r[val[2] - 1])) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, val);
 	}

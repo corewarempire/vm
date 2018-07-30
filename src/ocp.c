@@ -1,8 +1,16 @@
-#include "corewar.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ocp.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:17:26 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// 11223300
-// 3 en binaire <=> 11
-// Donc decaler puis AND sur bit
+#include "corewar.h"
 
 unsigned int	ocp_first(unsigned char c)
 {

@@ -1,14 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sti.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 23:01:41 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:08:09 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
+static void		verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 {
-	// ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
-	// ft_putnbrstrnbr(proc->id_process, "\nSti r", bd->ram[MEM_MOD(proc->pc + 2)]);
-	// ft_putstrnbrstr(" to ", val[1], " + ");
-	// ft_putnbrstrnbr(val[2], " = ", val[1] + val[2]);
-	// ft_putstrnbrstr(" (with PC and mod at : ", (proc->pc + ((val[1] + val[2]) % IDX_MOD)), "). Carry :");
-	// ft_putnbr(proc->carry);
-	// ft_putstr(".\n\n");
+	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
+	ft_putnbrstrnbr(proc->id_process,
+			"\nSti r", bd->ram[MEM_MOD(proc->pc + 2)]);
+	ft_putstrnbrstr(" to ", val[1], " + ");
+	ft_putnbrstrnbr(val[2], " = ", val[1] + val[2]);
+	ft_putstrnbrstr(" (with PC and mod at : ",
+			(proc->pc + ((val[1] + val[2]) % IDX_MOD)), "). Carry :");
+	ft_putnbr(proc->carry);
+	ft_putstr(".\n\n");
 }
 
 static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
@@ -33,47 +47,25 @@ static	int		get_value(t_board *bd, int *pc, int ocp, int flag)
 	return (res);
 }
 
-static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
+static int		valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	if (val[0] < 1 || val[0] > 16)
-	{
 		return (0);
-	}
 	if (ocp[1] == REG_CODE && (val[1] < 1 || val[1] > 16))
-	{
 		return (0);
-	}
-	printf("Registre r%d", val[0]);
 	val[0] = proc->r[val[0] - 1];
 	if (ocp[1] == REG_CODE)
-	{
-		printf(" registre r%d{%d}", val[1], proc->r[val[1] - 1]);
 		val[1] = proc->r[val[1] - 1];
-	}
 	else if (ocp[1] == IND_CODE)
-	{
-		printf(" ind at addresse %d {%d}", val[1], get_dir2(bd, proc->pc + val[1]));
 		val[1] = get_dir2(bd, proc->pc + val[1]);
-	}
 	else
-	{
 		printf(" dir val1:%d ", val[1]);
-	}
-
 	if (ocp[2] == REG_CODE)
-	{
-		printf(" val2:r%d{%d}", val[2], proc->r[val[2] - 1]);
 		val[2] = proc->r[val[2] - 1];
-	}
-	else
-	{
-		printf(" val2:%d ", val[2]);
-	}
-	printf("ADDRESSE FINAL MOD %d\n", (proc->pc + ((val[1] + val[2]) % IDX_MOD)));
 	return (1);
 }
 
-void	sti(t_board *bd, t_process *proc)
+void			sti(t_board *bd, t_process *proc)
 {
 	int	ocp[3];
 	int	val[3];
@@ -96,10 +88,6 @@ void	sti(t_board *bd, t_process *proc)
 		proc->carry = (!val[0]) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, ocp, val);
-	}
-	else
-	{
-		printf("INVALID\n");
 	}
 	proc->pc = offset;
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lld.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:21:57 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static void	verbosity(t_board *bd, t_process *proc, int ocp, int val)
@@ -10,7 +22,8 @@ static void	verbosity(t_board *bd, t_process *proc, int ocp, int val)
 	}
 	else
 	{
-		ft_putnbrstrnbr(proc->id_process, "\nLld ", get_dir2(bd, proc->pc + val));
+		ft_putnbrstrnbr(proc->id_process, "\nLld ",
+			get_dir2(bd, proc->pc + val));
 		ft_putstrnbrstr(" in r", bd->ram[MEM_MOD(proc->pc + 4)], ". Carry : ");
 	}
 	ft_putnbr(proc->carry);
@@ -20,15 +33,17 @@ static void	verbosity(t_board *bd, t_process *proc, int ocp, int val)
 static int	valid_args(t_board *bd, t_process *proc, int ocp)
 {
 	if (ocp == DIR_CODE
-		&& (bd->ram[MEM_MOD(proc->pc + 6)] < 1 || bd->ram[MEM_MOD(proc->pc + 6)] > 16))
+		&& (bd->ram[MEM_MOD(proc->pc + 6)] < 1
+			|| bd->ram[MEM_MOD(proc->pc + 6)] > 16))
 		return (0);
-	else if (ocp != DIR_CODE 
-		&& (bd->ram[MEM_MOD(proc->pc + 4)] < 1 || bd->ram[MEM_MOD(proc->pc + 4)] > 16))
+	else if (ocp != DIR_CODE
+		&& (bd->ram[MEM_MOD(proc->pc + 4)] < 1
+			|| bd->ram[MEM_MOD(proc->pc + 4)] > 16))
 		return (0);
 	return (1);
 }
 
-void	lld(t_board *bd, t_process *proc)
+void		lld(t_board *bd, t_process *proc)
 {
 	int	ocp;
 	int	value;
@@ -45,10 +60,6 @@ void	lld(t_board *bd, t_process *proc)
 		proc->carry = (!value) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, ocp, value);
-	}
-	else
-	{
-		printf("NOT VALID\n");
 	}
 	proc->pc += (ocp == DIR_CODE) ? 7 : 5;
 }

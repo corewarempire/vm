@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   live.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 21:01:46 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/30 23:20:48 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static void	verbosity(t_process *proc, int val)
@@ -25,7 +37,7 @@ static int	is_true_player(t_board *bd, int val)
 	return (0);
 }
 
-void	live(t_board *bd, t_process *proc)
+void		live(t_board *bd, t_process *proc)
 {
 	int				val;
 
