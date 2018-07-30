@@ -3,7 +3,7 @@
 static void	verbosity(t_board *bd, t_process *proc, int *ocp, int *val)
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
-	ft_putnbrstrnbr(proc->id_process, "\nSti r", bd->ram[proc->pc + 2]);
+	ft_putnbrstrnbr(proc->id_process, "\nSti r", bd->ram[MEM_MOD(proc->pc + 2)]);
 	ft_putstrnbrstr(" to ", val[1], " + ");
 	ft_putnbrstrnbr(val[2], " = ", val[1] + val[2]);
 	ft_putstrnbrstr(" (with PC and mod at : ", (proc->pc + ((val[1] + val[2]) % IDX_MOD)), "). Carry :");
@@ -46,6 +46,8 @@ static int	valid_args(t_board *bd, t_process *proc, int *ocp, int *val)
 	val[0] = proc->r[val[0] - 1];
 	if (ocp[1] == REG_CODE)
 		val[1] = proc->r[val[1] - 1];
+	if (ocp[1] == IND_CODE)
+		val[1] = get_dir4(bd, proc->pc + val[1]);
 	if (ocp[2] == REG_CODE)
 		val[2] = proc->r[val[2] - 1];
 	return (1);
@@ -58,22 +60,26 @@ void	sti(t_board *bd, t_process *proc)
 	int	offset;
 	int	i;
 
+	i = 0;
+	offset = proc->pc + 2;
 	ocp[0] = REG_CODE;
 	ocp[1] = ocp_scd(bd->ram[MEM_MOD(proc->pc + 1)]);
 	ocp[2] = ocp_third(bd->ram[MEM_MOD(proc->pc + 1)]);
-	i = 0;
-	offset = proc->pc + 2;
 	while (i < 3)
 	{
-		val[i] = get_value(bd, &offset, ocp[i], 1);
+		val[i] = get_value(bd, &offset, ocp[i], 0);
 		i++;
 	}
 	if (valid_args(bd, proc, ocp, val))
 	{
+		set_ramvalue(bd, (proc->pc + ((val[1] + val[2]) % IDX_MOD)), val[0]);
+		proc->carry = (!val[0]) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(bd, proc, ocp, val);
-		proc->carry = (!val[0]) ? 1 : 0;
-		set_ramvalue(bd, (proc->pc + ((val[1] + val[2]) % IDX_MOD)), val[0]);
 	}
-	proc->pc += offset;
+	else
+	{
+		printf("INVALID\n");
+	}
+	proc->pc = offset;
 }

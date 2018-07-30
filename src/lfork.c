@@ -15,8 +15,11 @@ void	lfork(t_board *bd, t_process *proc)
 
 	newpc = get_dir2(bd, proc->pc + 1);
 	if (!(new = add_process(bd->lst_process, bd->id_process++, proc->id_player, proc->pc)))
+	{
 		printf("FAILED TO CREATE FORK NEED TO EXIT\n");
-	new->pc = proc->pc + newpc;
+		return ;
+	}
+	new->pc = MEM_MOD(proc->pc + newpc);
 	proc->pc += 3;
 	update_process_count(bd, proc->id_player, 1);
 	if (bd->verbose[1])
