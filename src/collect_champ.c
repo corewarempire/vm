@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 02:46:02 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 02:47:36 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 03:38:09 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ int			check_size(t_champ *champ)
 {
 	unsigned int	size;
 
-	lseek(champ->fd, PROG_NAME_LENGTH + 4 + 4, SEEK_SET);
-	if (read(champ->fd, (char *)&size, 4) == -1)
+	if (lseek(champ->fd, PROG_NAME_LENGTH + 4 + 4, SEEK_SET) < 0)
+	{
+		return (ft_error(4, 1));
+	}
+	if (read(champ->fd, (char *)&size, 4) < 4)
 		return (ft_error(3, 1));
 	size = ((size >> 24) & 0xff)
 		| ((size << 8) & 0xff0000)
@@ -48,7 +51,7 @@ int			collect_comment(t_champ *champ)
 
 	if (!(check_size((champ))))
 		return (0);
-	if (read(champ->fd, comment, COMMENT_LENGTH) == -1)
+	if (read(champ->fd, comment, COMMENT_LENGTH) < COMMENT_LENGTH)
 		return (ft_error(3, 1));
 	comment[COMMENT_LENGTH] = '\0';
 	if (!(champ->comment = ft_strdup(comment)))
@@ -66,11 +69,11 @@ int			collect_champion_data(int fd, t_champ **champ)
 	if (!((*champ) = (t_champ *)malloc(sizeof(t_champ))))
 		return (ft_error(1, 0));
 	(*champ)->fd = fd;
-	if (read(fd, magic, 4) == -1)
+	if (read(fd, magic, 4) < 4)
 		return (ft_error(3, 1));
 	if (!((int)magic[1] == 234 && (int)magic[2] == 131 && (int)magic[3] == 243))
 		return (ft_error(3, 0));
-	if (read(fd, str, PROG_NAME_LENGTH) == -1)
+	if (read(fd, str, PROG_NAME_LENGTH) < PROG_NAME_LENGTH)
 		return (ft_error(3, 1));
 	str[PROG_NAME_LENGTH] = '\0';
 	if (!((*champ)->name = ft_strdup(str)))

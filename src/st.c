@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 23:09:25 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:10:08 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 03:50:28 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	verbosity(t_board *bd, t_process *proc, int data[3])
 {
 	ft_putstrnbrstr("Player ", proc->id_player, " // Process ");
 	ft_putnbrstrnbr(proc->id_process, "\nSt r", bd->ram[MEM_MOD(proc->pc + 2)]);
-	(data[2] == REG_CODE) ? ft_putstrnbrstr(" to r", data[0], " carry: X") :
-	ft_putstrnbrstr(" to ", data[1], "carry: X");
+	(data[2] == REG_CODE) ? ft_putstrnbrstr(" to r", data[0], "") :
+	ft_putstrnbrstr(" to ", data[1], "");
 	ft_putstr("\n\n");
 }
 

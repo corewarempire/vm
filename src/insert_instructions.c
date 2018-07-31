@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 02:46:32 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 03:50:38 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int		insert_code(t_board *bd, int pos)
 	tmp = bd->first_champ;
 	while (tmp->next && tmp->next->fd != 0)
 		tmp = tmp->next;
-	lseek(tmp->fd, 2192, SEEK_SET);
+	if (lseek(tmp->fd, 2192, SEEK_SET) < 0)
+			return (ft_error(4, 1));
 	while (read(tmp->fd, &str, 1) > 0)
 	{
 		bd->ram[pos] = (unsigned char)str;
