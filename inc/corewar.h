@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:07:31 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/31 00:58:43 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 02:36:42 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct		s_board
 	unsigned int	champions_count;
 	unsigned int	cycle;
 	unsigned int	id_process;
-	unsigned int	last_live;
+	int				last_live;
 	unsigned int	last_check_purge;
 	unsigned int	check_nbr;
 	unsigned int	total_cycle_live;
@@ -190,13 +190,10 @@ int					ft_strlen(const char *src);
 unsigned char		*ft_memalloc_c(size_t size, char c);
 char				*ft_strncpy(char *dest, const char *src, size_t n);
 char				*ft_strchr(const char *s, int c);
-char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strcpy(char *dest, const char *str);
 char				*ft_strdup(const char *s);
 char				*ft_strstr(const char *haystack, const char *needle);
-char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strjoin_f(char const *s1, char const *s2, int j);
 char				*get_name_champ(t_board *bd, int id);
 void				memclear(t_board *bd);
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   collect_champ.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/31 02:46:02 by akarasso          #+#    #+#             */
+/*   Updated: 2018/07/31 02:47:36 by akarasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/corewar.h"
 
 static int	attribute_id(t_board *bd, t_champ *champ, int t[2], char **argv)
@@ -6,16 +18,16 @@ static int	attribute_id(t_board *bd, t_champ *champ, int t[2], char **argv)
 		champ->player_id = get_first_number(bd, 1);
 	else
 	{
-		if (ft_atoi(argv[t[0] + 1]) < -16 || ft_atoi(argv[t[0] + 1]) > 16 )
-			return(ft_error(2, 0));
+		if (ft_atoi(argv[t[0] + 1]) < -16 || ft_atoi(argv[t[0] + 1]) > 16)
+			return (ft_error(2, 0));
 		champ->player_id = get_first_number(bd, ft_atoi(argv[t[0] + 1]));
 	}
 	return (1);
 }
 
-int  	   check_size(t_champ *champ)
+int			check_size(t_champ *champ)
 {
-	unsigned int    size;
+	unsigned int	size;
 
 	lseek(champ->fd, PROG_NAME_LENGTH + 4 + 4, SEEK_SET);
 	if (read(champ->fd, (char *)&size, 4) == -1)
@@ -23,18 +35,18 @@ int  	   check_size(t_champ *champ)
 	size = ((size >> 24) & 0xff)
 		| ((size << 8) & 0xff0000)
 		| ((size >> 8) & 0xff00)
-		|((size << 24) & 0xff000000);
+		| ((size << 24) & 0xff000000);
 	if (size > CHAMP_MAX_SIZE)
 		return (ft_error(4, 0));
 	champ->header_champsize = size;
 	return (1);
 }
 
-int     	collect_comment(t_champ *champ)
+int			collect_comment(t_champ *champ)
 {
-	char            comment[COMMENT_LENGTH + 1];
+	char	comment[COMMENT_LENGTH + 1];
 
-	  if (!(check_size((champ))))
+	if (!(check_size((champ))))
 		return (0);
 	if (read(champ->fd, comment, COMMENT_LENGTH) == -1)
 		return (ft_error(3, 1));
@@ -46,11 +58,10 @@ int     	collect_comment(t_champ *champ)
 	return (1);
 }
 
-
-int     	collect_champion_data(int fd, t_champ **champ)
+int			collect_champion_data(int fd, t_champ **champ)
 {
-	unsigned char   magic[5];
-	char            str[PROG_NAME_LENGTH + 1];
+	unsigned char	magic[5];
+	char			str[PROG_NAME_LENGTH + 1];
 
 	if (!((*champ) = (t_champ *)malloc(sizeof(t_champ))))
 		return (ft_error(1, 0));
@@ -62,18 +73,24 @@ int     	collect_champion_data(int fd, t_champ **champ)
 	if (read(fd, str, PROG_NAME_LENGTH) == -1)
 		return (ft_error(3, 1));
 	str[PROG_NAME_LENGTH] = '\0';
-
 	if (!((*champ)->name = ft_strdup(str)))
+	{
+		free(*champ);
 		return (ft_error(1, 0));
+	}
 	if (!(collect_comment(*champ)))
+	{
+		free((*champ)->name);
+		free(*champ);
 		return (0);
+	}
 	return (1);
 }
 
-int      	open_champ(t_board *bd, char **argv, int i, int op)
+int			open_champ(t_board *bd, char **argv, int i, int op)
 {
-	int fd;
-	t_champ *champ;
+	int		fd;
+	t_champ	*champ;
 
 	if (ft_strlen(argv[i + op]) <= 4 || !ft_strcmp(argv[i + op]
 		+ ft_strlen(argv[i + op] - 4), ".cor"))

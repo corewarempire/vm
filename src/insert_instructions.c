@@ -6,12 +6,11 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 00:01:36 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 02:46:32 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/corewar.h"
-
 
 static int		insert_code(t_board *bd, int pos)
 {
@@ -32,6 +31,7 @@ static int		insert_code(t_board *bd, int pos)
 	}
 	if (tmp->header_champsize != size)
 		return (ft_error(4, 0));
+	bd->last_live = tmp->player_id;
 	close(tmp->fd);
 	tmp->fd = 0;
 	return (1);

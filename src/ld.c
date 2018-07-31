@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 21:01:53 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 00:08:24 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 02:45:02 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void		ld(t_board *bd, t_process *proc)
 	{
 		proc->pc += (ocp == IND_CODE) ? 5 : 7;
 		return ;
-	}	
+	}
 	if (reg > 0 && reg < 17)
 	{
-		proc->carry = (!(proc->r[reg - 1] = value)) ? 1 : 0;
+		proc->r[reg - 1] = value;
+		proc->carry = (!value) ? 1 : 0;
 		if (bd->verbose[1])
 			verbosity(proc, value, reg);
 	}

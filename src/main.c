@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 20:15:38 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 01:46:54 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 02:35:41 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void	init_struct(t_board *bd)
 {
-	bd->champions_count = 0;
-	bd->opt_list = NULL;
 	bd->lst_process = NULL;
-	bd->ram = NULL;
-	bd->verbose = NULL;
 	bd->first_champ = NULL;
+	bd->champions_count = 0;
 	bd->cycle = 0;
 	bd->id_process = 0;
-	bd->dump = -1;
-	bd->total_cycle_live = 0;
+	bd->last_live = 0;
+	bd->last_check_purge = 0;
 	bd->check_nbr = 0;
+	bd->total_cycle_live = 0;
+	bd->ram = NULL;
+	bd->dump = -1;
+	bd->cycle_to_die = 0;
+	bd->opt_list = NULL;
+	bd->verbose = NULL;
 	bd->p = 0;
 }
 
@@ -33,7 +36,7 @@ int		init_board_data(t_board **bd, char **argv)
 	int i;
 
 	i = 0;
-	if (!((*bd) = (t_board *)malloc(sizeof(t_board))))
+	if (!bd || !(*bd = (t_board *)malloc(sizeof(t_board))))
 		return (ft_error(1, 0));
 	init_struct(*bd);
 	while (argv[++i])
@@ -84,7 +87,7 @@ int		main(int argc, char **argv)
 	board = NULL;
 	if (argc < 2)
 		return (ft_usage());
-	if (!(init_board_data(&board, argv))
+	if (!init_board_data(&board, argv)
 		|| !collect_inputs(argv, argc, board)
 			|| !insert_instructions(board))
 		return (error_management(board));

@@ -34,9 +34,9 @@ SRC_NAME =	main.c tools.c		insert_instructions.c 	collect_champ.c \
 
 LIB_NAME = 	ft_putchar.c ft_putstr.c ft_strdup.c \
 			ft_atoi.c ft_memalloc.c ft_memalloc_c.c \
-			ft_putnbr.c ft_strcmp.c ft_strcpy.c ft_strjoin.c ft_strjoin_f.c \
+			ft_putnbr.c ft_strcmp.c ft_strcpy.c  \
 			ft_strlen.c ft_strstr.c pos_in_str.c ft_memset.c  ft_strcat.c \
-			ft_puttable.c ft_strsub.c ft_strchr.c \
+			ft_puttable.c ft_strchr.c \
 			ft_memcpy.c pos_str_tab.c \
 			ft_putstr_fd.c ft_bzero.c ft_putchar_fd.c ft_isdigit.c \
 			ft_atoi_base.c ft_put3str.c ft_isnumber.c ft_putstrnbrstr.c \

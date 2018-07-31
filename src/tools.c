@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 23:05:59 by akarasso          #+#    #+#             */
-/*   Updated: 2018/07/31 00:29:55 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 02:28:25 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int		ft_error(int id, int errn)
 			ft_put3str(" -> ", strerror(errno), ".\n\n");
 		else
 			ft_putstr(".\n\n");
+	}
+	else if (id == 4)
+	{
+		ft_putstr_fd("ERROR: Invalid [champion].cor header\n\n", 2);
 	}
 	else if (id == 6)
 	{

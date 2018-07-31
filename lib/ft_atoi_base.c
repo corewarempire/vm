@@ -6,13 +6,13 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:06:53 by adhondt           #+#    #+#             */
-/*   Updated: 2018/07/31 00:16:48 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 02:51:03 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/corewar.h"
 
-static int  ft_pow(int p, int i)
+static int	ft_pow(int p, int i)
 {
 	size_t	res;
 
@@ -56,7 +56,7 @@ static int	nbr_digits(const char *str, int base)
 	return (i);
 }
 
-int	ft_atoi_base(const char *str, int base)
+int			ft_atoi_base(const char *str, int base)
 {
 	int	ret;
 	int	length;
